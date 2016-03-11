@@ -47,19 +47,47 @@ foreach ($news as $item){
   else $regular_items []= "$html_block";
 
 }
-?>
 
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+$final_output = "
 
-<div data-uark-news-widget-config="https://wordpress.uark.edu/business/uark-news-widget/new-homepage-feed/" class="uark-news-embed">
-    <div class="col-md-12 news-item-oldschool">
+<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'></head>
 
-<?php
-  foreach ($featured_items as $featured_item)
-    echo "$featured_item";
-  foreach ($regular_items as $regular_item)
-    echo "$regular_item";
-?>
+<div data-uark-news-widget-config='https://wordpress.uark.edu/business/uark-news-widget/new-homepage-feed/' class='uark-news-embed'>
+    <div class='col-md-12 news-item-oldschool'>
+";
 
+foreach ($featured_items as $featured_item)
+  $final_output .= "$featured_item";
+foreach ($regular_items as $regular_item)
+  $final_output .= "$regular_item";
+
+$final_output .= "
     </div>
 </div>
+";
+
+$filename = 'feed.html';
+$somecontent = $final_output; 
+
+// Let's make sure the file exists and is writable first.
+if (is_writable($filename)) {
+
+    // In our example we're opening $filename in write mode.
+    if (!$handle = fopen($filename, 'w')) {
+         echo "Cannot open file ($filename)";
+         exit;
+    }
+
+    // Write $somecontent to our opened file.
+    if (fwrite($handle, $somecontent) === FALSE) {
+        echo "Cannot write to file ($filename)";
+        exit;
+    }
+
+    echo "Success, wrote ($somecontent) to file ($filename)";
+
+    fclose($handle);
+
+} else {
+    echo "The file $filename is not writable";
+}
