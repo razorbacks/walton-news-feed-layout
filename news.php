@@ -1,5 +1,6 @@
 <?php
 
+$number_of_posts_to_show = 4;
 $default_thumbnail = "http://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
 $feed = file_get_contents("https://wordpress.uark.edu/business/wp-json/posts"); 
 
@@ -9,7 +10,10 @@ if(empty($news[0]["link"])) die("Feed empty.");
 
 $featured_items = array();
 $regular_items = array();
+$count = 0;
 foreach ($news as $item){
+
+  if(++$count > $number_of_posts_to_show) break;
 
   $featured = false;
   $news_item = false;
