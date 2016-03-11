@@ -9,15 +9,26 @@ $news = json_decode($feed, true);
 if(empty($news[0]["link"])) die();
 ?>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
 
 <div data-uark-news-widget-config="https://wordpress.uark.edu/business/uark-news-widget/new-homepage-feed/" class="uark-news-embed">
     <div class="col-md-12 news-item-oldschool">
 
 <?php
+$featured_items = array();
+$regular_items = array();
+$html_block = "";
 foreach ($news as $item){
+  $featured = false;
+  $news_item = false;
+  foreach ($item["terms"]["category"] as $category){
+    if ($category["ID"] == "22") {
+      $featured = true; break;
+    } elseif ($category["ID"] == "40") {
+      $news_item = true; break;
+    }
+  }
+  if (!$featured && !$news_item) continue;
 ?>
 
   <div class="media">
