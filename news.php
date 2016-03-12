@@ -34,7 +34,7 @@ foreach ($news as $item){
   $html_block = "
   <div class='media'>
     <a class='pull-left' href='$item[link]'>
-      <img height='128px' src='$thumbnail' alt='$item[title] featured image'/>
+      <img style='height:128px' src='$thumbnail' alt='$item[title] featured image'/>
     </a>
     <div class='media-body'>
       <h4 class='media-heading'><a href='$item[link]'>$item[title]</a></h4>
