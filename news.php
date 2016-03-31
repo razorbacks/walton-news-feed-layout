@@ -65,9 +65,10 @@ $final_output .= "
     </div>
 </div>
 <style>
-@media only screen and (min-width: 480px)
-.media img {
-    width: 128px;
+@media only screen and (min-width: 480px){
+  .media img {
+      width: 128px;
+  }
 }
 </style>
 ";
