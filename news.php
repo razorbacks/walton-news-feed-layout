@@ -34,7 +34,7 @@ foreach ($news as $item){
   $html_block = "
   <div class='media'>
     <a class='pull-left' href='$item[link]'>
-      <img style='height:128px' src='$thumbnail' alt='$item[title] featured image'/>
+      <img src='$thumbnail' alt='$item[title] featured image'/>
     </a>
     <div class='media-body'>
       <h4 class='media-heading'><a href='$item[link]'>$item[title]</a></h4>
@@ -64,6 +64,12 @@ foreach ($regular_items as $regular_item)
 $final_output .= "
     </div>
 </div>
+<style>
+@media only screen and (min-width: 480px)
+.media img {
+    width: 128px;
+}
+</style>
 ";
 
 $filename = 'feed.html';
