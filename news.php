@@ -1,5 +1,5 @@
 <?php
-
+$categories = [40, 22];
 $number_of_posts_to_show = 4;
 $default_thumbnail = "http://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
 $feed = file_get_contents("https://wordpress.uark.edu/business/wp-json/posts"); 
@@ -18,13 +18,16 @@ foreach ($news as $item){
   $featured = false;
   $news_item = false;
   foreach ($item["terms"]["category"] as $category){
-    if ($category["ID"] == "22") {
-      $featured = true; break;
-    } elseif ($category["ID"] == "40") {
-      $news_item = true; break;
+    if ($category["ID"] == 22) {
+      $featured = true;
     }
+    foreach ($categories as $catid)
+      if ($category["ID"] == $catid) {
+        $news_item = true; break;
+      }
+    if($news_item) break;
   }
-  if (!$featured && !$news_item) continue;
+  if (!$news_item) continue;
 
   if(!empty($item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"]))
     $thumbnail = str_replace("\\","",$item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"]);
