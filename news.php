@@ -2,6 +2,7 @@
 $categories = [40, 22];
 $number_of_posts_to_show = 4;
 $default_thumbnail = "http://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
+$filename = 'feed.html';
 $feed = file_get_contents("https://wordpress.uark.edu/business/wp-json/posts"); 
 
 $feed = utf8_encode($feed);
@@ -73,7 +74,6 @@ $final_output .= "
 </style>
 ";
 
-$filename = 'feed.html';
 $somecontent = $final_output; 
 
 // Let's make sure the file exists and is writable first.
