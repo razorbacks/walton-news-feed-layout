@@ -52,9 +52,6 @@ foreach ($news as $item){
 }
 
 $final_output = "
-
-<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'></head>
-
 <div data-uark-news-widget-config='https://wordpress.uark.edu/business/uark-news-widget/new-homepage-feed/' class='uark-news-embed'>
     <div class='col-md-12 news-item-oldschool'>
 ";
