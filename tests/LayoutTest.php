@@ -12,11 +12,10 @@ class LayoutTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider outputViewDataProvider
 	 */
 	public function testCanGenerateOutput($output){
-		$this->markTestSkipped();
 		$json     = file_get_contents(__DIR__."/json/posts.json");
 		$expected = file_get_contents(__DIR__."/html/$output.html");
 
-		$actual = (string)(new Layout($json));
+		$actual = (string)(new Layout($json, array(40, 22), 4, $output));
 
 		$this->assertSame($expected, $actual);
 	}
