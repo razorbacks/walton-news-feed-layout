@@ -1,7 +1,7 @@
 <?php
-use razorbacks\walton\news\feed\Generator;
+use razorbacks\walton\news\feed\Layout;
 
-class GeneratorTest extends PHPUnit_Framework_TestCase {
+class LayoutTest extends PHPUnit_Framework_TestCase {
 	public function outputViewDataProvider(){
 		return array(
 			'list' => array('list'),
@@ -15,8 +15,7 @@ class GeneratorTest extends PHPUnit_Framework_TestCase {
 		$json     = file_get_contents(__DIR__."/json/posts.json");
 		$expected = file_get_contents(__DIR__."/html/$output.html");
 
-		$generator = new Generator($json);
-		$actual = $generator->output($output);
+		$actual = (string)(new Layout($json, array(40, 22), 4, $output));
 
 		$this->assertSame($expected, $actual);
 	}
@@ -27,7 +26,7 @@ class GeneratorTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testCanInvalidateJSON(){
 		$invalid = file_get_contents(__DIR__.'/json/invalid.json');
-		$generator = new Generator($invalid);
+		$generator = new Layout($invalid, 1, 1, 'list');
 		$this->assertTrue(false);
 	}
 }

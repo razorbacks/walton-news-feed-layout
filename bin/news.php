@@ -1,7 +1,7 @@
 <?php
 $categories = [40, 22];
 $number_of_posts_to_show = 4;
-$default_thumbnail = "http://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
+$default_thumbnail = "https://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
 $template = 'list.php';
 $filename = 'feed.html';
 $feed = file_get_contents("https://wordpress.uark.edu/business/wp-json/posts"); 
