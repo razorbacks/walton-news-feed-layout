@@ -3,7 +3,7 @@ namespace razorbacks\walton\news\feed;
 
 use InvalidArgumentException;
 
-class Generator {
+class Layout {
 	protected $data;
 	protected $categories;
 	protected $number_of_posts_to_show;
