@@ -3,9 +3,9 @@ use razorbacks\walton\news\feed\Generator;
 
 class GeneratorTest extends PHPUnit_Framework_TestCase {
 	public function outputViewDataProvider(){
-		return [
-			'list' => ['list'],
-		];
+		return array(
+			'list' => array('list'),
+		);
 	}
 
 	/**

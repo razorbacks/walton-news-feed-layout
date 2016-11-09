@@ -4,7 +4,7 @@ namespace razorbacks\walton\news\feed;
 use InvalidArgumentException;
 
 class Generator {
-	protected $data = [];
+	protected $data;
 
 	public function __construct($json){
 		$this->data = json_decode($json, true);
