@@ -10,7 +10,8 @@ class Generator {
 		$this->data = json_decode($json, true);
 		if (!is_array($this->data)){
 			throw new InvalidArgumentException(
-				"Bad JSON: ".json_last_error_msg()
+				"JSON Error #".json_last_error().
+				". see http://php.net/manual/en/function.json-last-error.php"
 			);
 		}
 	}
