@@ -2,6 +2,7 @@
 $categories = [40, 22];
 $number_of_posts_to_show = 4;
 $default_thumbnail = "http://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
+$template = 'list.php';
 $filename = 'feed.html';
 $feed = file_get_contents("https://wordpress.uark.edu/business/wp-json/posts"); 
 
@@ -34,45 +35,23 @@ foreach ($news as $item){
     $thumbnail = str_replace("\\","",$item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"]);
   else
     $thumbnail = $default_thumbnail;
-  
-  $html_block = "
-  <div class='media'>
-    <a class='pull-left' href='$item[link]'>
-      <img src='$thumbnail' alt='$item[title] featured image'/>
-    </a>
-    <div class='media-body'>
-      <h4 class='media-heading'><a href='$item[link]'>$item[title]</a></h4>
-      <p>$item[excerpt]</p>
-    </div>
-  </div>
-  ";
-  
+
+  $item['title'] = htmlentities($item['title']);
+  require(__DIR__."/templates/$template");
+
   if ($featured) $featured_items []= "$html_block";
   else $regular_items []= "$html_block";
 
 }
 
-$final_output = "
-<div data-uark-news-widget-config='https://wordpress.uark.edu/business/uark-news-widget/new-homepage-feed/' class='uark-news-embed'>
-    <div class='col-md-12 news-item-oldschool'>
-";
+$final_output = $html_opener;
 
 foreach ($featured_items as $featured_item)
   $final_output .= "$featured_item";
 foreach ($regular_items as $regular_item)
   $final_output .= "$regular_item";
 
-$final_output .= "
-    </div>
-</div>
-<style>
-@media only screen and (min-width: 480px){
-  .media img {
-      width: 128px;
-  }
-}
-</style>
-";
+$final_output .= $html_closer;
 
 $somecontent = $final_output; 
 
