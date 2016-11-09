@@ -4,7 +4,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="UTF-8">
-      <title>Home Page | 
+      <title>College Interior | 
                                                                  Walton College |
                                                         University of Arkansas
                 
@@ -26,13 +26,19 @@
             OUC.props = OUC.props || {};
             
             
-                OUC.globalProps['path'] = "/test/ou-frame-templates/home-page.php";
+                OUC.globalProps['path'] = "/test/ou-frame-templates/college-interior.php";
                 OUC.globalProps['domain'] = "www.uark.edu";
                 OUC.globalProps['index-file'] = "index";
                 OUC.globalProps['extension'] = "php";
                 OUC.globalProps['production_root'] = "";
-                OUC.pageProps['heading'] = "Home Page";
-                OUC.pageProps['breadcrumb'] = "Home Page";
+                OUC.pageProps['pagetype'] = "college-interior";
+                OUC.pageProps['banner-region'] = "on";
+                OUC.pageProps['banner-location'] = "global";
+                OUC.pageProps['college-banner-type'] = "large";
+                OUC.pageProps['heading'] = "College Interior";
+                OUC.pageProps['heading-display'] = "on";
+                OUC.pageProps['breadcrumb'] = "College Interior";
+                OUC.pageProps['intro-text'] = "on";
             
             var key;
             for (key in OUC.globalProps) {
@@ -378,12 +384,27 @@
 <!-- end of main mega nav ul --></div>
 <!-- end of navbar-header div --> <!-- end of mega menu include -->
          </div>
-      </nav>
+      </nav><img alt="College Interior" src="http://walton.uark.edu/images/large-banner.jpg" style="width: 100%" title="College Interior" class="img-responsive"><div id="main-container" class="container walton-extra">
+         <section class="landingPage"></section>
+         <div class="row">
+            <div class="col-md-12">
+               <h2 class="intro-headline">College Interior</h2>
+               <ul class="breadcrumb">
+                  <li><a href="http://www.uark.edu/" class="uark-home">
+                                                                U of A
+                                                        </a></li>
+                  <li><a href="/">Walton College</a></li>
+                  <li><a href="/test/"></a></li>
+                  <li><a href="/test/ou-frame-templates/">Page Title</a></li>
+                  <li>College Interior</li>
+               </ul>
+               <p class="lead">Intro Text</p>
+            </div>
+         </div>
+
+         <div id="php_include_div"><?php include("../bin/feed.html") ?></div>
                 
-                <img class="img-responsive" src="http://waltoncollege.uark.edu/temp/walton-web/images/cat.jpg">
-                
-      <div id="php_include_div"><?php include("../feed.html") ?></div>
-        
+      </div>
       <section class="gray" id="section-footer" style="padding: 10px 0px 20px 0px;">
          <div class="container">
             <div class="row" style="padding-top: 30px;">
@@ -514,7 +535,7 @@
 </div>
 </footer>
 <script>
-                        var current_path = "/test/ou-frame-templates/home-page.php";
+                        var current_path = "/test/ou-frame-templates/college-interior.php";
                 </script><!-- javascripts that don't need to go in the head can go here -->
 
 
@@ -598,7 +619,7 @@ document.getElementById("directedit-footer").innerHTML = anchor;
 }
 window.onload = function(){ directedit(); }
 //--></script>
-      <!--2016-04-05T15:48:00Z--><div id="hidden">
-         <a rel="nofollow" id="oudirectedit" href="http://a.omniupdate.uark.edu/10?skin=oucampus&amp;account=walton&amp;site=walton&amp;action=de&amp;path=/test/ou-frame-templates/home-page.pcf" ><span class="hidden">Edit webpage</span></a>
+      <!--2016-04-05T15:44:00Z--><div id="hidden">
+         <a rel="nofollow" id="oudirectedit" href="http://a.omniupdate.uark.edu/10?skin=oucampus&amp;account=walton&amp;site=walton&amp;action=de&amp;path=/test/ou-frame-templates/college-interior.pcf" ><span class="hidden">Edit webpage</span></a>
       </div><span id="directedit-footer"></span></body>
 </html>
