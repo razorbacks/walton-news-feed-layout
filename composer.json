@@ -1,0 +1,11 @@
+{
+    "name": "razorbacks/walton.news",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Jeff Puckett",
+            "email": "jpuckett@walton.uark.edu"
+        }
+    ],
+    "require": {}
+}
