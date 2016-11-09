@@ -6,7 +6,7 @@ php:
   - 5.3.3
 install:
   - composer config -g -- disable-tls true
-  - composer install
+  - composer install --no-dev
 script:
   - phpunit --coverage-clover=coverage.xml
 after_success:
