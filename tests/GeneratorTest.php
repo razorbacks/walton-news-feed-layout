@@ -20,4 +20,14 @@ class GeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame($expected, $actual);
 	}
+
+	/**
+	 * @testdox Can invalidate JSON
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testCanInvalidateJSON(){
+		$invalid = file_get_contents(__DIR__.'/json/invalid.json');
+		$generator = new Generator($invalid);
+		$this->assertTrue(false);
+	}
 }
