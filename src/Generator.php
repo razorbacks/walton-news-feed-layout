@@ -7,8 +7,12 @@ class Generator {
 	protected $data;
 	protected $categories;
 	protected $number_of_posts_to_show;
+	protected $default_thumbnail = "https://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
+	protected $views;
 
 	public function __construct($feed, $categories, $number_of_posts_to_show){
+		$this->views = __DIR__.'/../views';
+
 		$this->data = json_decode($feed, true);
 		if (!is_array($this->data)){
 			throw new InvalidArgumentException(
