@@ -2,22 +2,28 @@
 namespace razorbacks\walton\news\feed;
 
 use InvalidArgumentException;
+use Twig_Environment;
+use Twig_Loader_Filesystem;
 
 class Layout {
-	protected $data;
+	protected $news;
 	protected $categories;
 	protected $number_of_posts_to_show;
 	protected $default_thumbnail = "https://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
 	protected $view;
 	protected $html;
+	protected $twig;
 
 	public function __construct($feed, $categories, $count, $view){
-		$this->view = __DIR__."/../views/$view.php";
+		$viewsDir = __DIR__."/../views";
+		$this->view = "$viewsDir/$view.php";
 		if(!file_exists($this->view)){
 			throw new InvalidArgumentException(
 				"$view does not exist."
 			);
 		}
+
+		$this->twig = new Twig_Environment(new Twig_Loader_Filesystem($viewsDir));
 
 		$feed = utf8_encode($feed);
 		$this->news = json_decode($feed, true);
