@@ -17,7 +17,7 @@ class LayoutTest extends PHPUnit_Framework_TestCase {
 
 		$actual = (string)(new Layout($json, array(40, 22), 4, $output));
 
-		$this->assertSame($expected, $actual);
+		$this->assertEquals($expected, $actual);
 	}
 
 	/**
