@@ -28,7 +28,7 @@ class GeneratorTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testCanInvalidateJSON(){
 		$invalid = file_get_contents(__DIR__.'/json/invalid.json');
-		$generator = new Generator($invalid, 1, 1);
+		$generator = new Generator($invalid, 1, 1, 'list');
 		$this->assertTrue(false);
 	}
 }

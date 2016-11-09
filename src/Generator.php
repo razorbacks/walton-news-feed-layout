@@ -10,7 +10,7 @@ class Generator {
 	protected $default_thumbnail = "https://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
 	protected $views;
 
-	public function __construct($feed, $categories, $number_of_posts_to_show){
+	public function __construct($feed, $categories, $number_of_posts_to_show, $view){
 		$this->views = __DIR__.'/../views';
 
 		$feed = utf8_encode($feed);
@@ -51,6 +51,12 @@ class Generator {
 		} else {
 			throw new InvalidArgumentException(
 				"number of posts to show must a positive integer"
+			);
+		}
+
+		if(!file_exists($this->views."/$view.php")){
+			throw new InvalidArgumentException(
+				"$view does not exist."
 			);
 		}
 	}
