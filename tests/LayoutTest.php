@@ -16,8 +16,7 @@ class LayoutTest extends PHPUnit_Framework_TestCase {
 		$json     = file_get_contents(__DIR__."/json/posts.json");
 		$expected = file_get_contents(__DIR__."/html/$output.html");
 
-		$generator = new Layout($json);
-		$actual = $generator->output($output);
+		$actual = (string)(new Layout($json));
 
 		$this->assertSame($expected, $actual);
 	}

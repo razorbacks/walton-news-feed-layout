@@ -61,5 +61,5 @@ class Layout {
 		}
 	}
 
-	public function output($view){}
+	public function __toString(){}
 }
