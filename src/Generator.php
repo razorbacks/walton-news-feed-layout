@@ -5,13 +5,42 @@ use InvalidArgumentException;
 
 class Generator {
 	protected $data;
+	protected $categories;
+	protected $number_of_posts_to_show;
 
-	public function __construct($feed){
+	public function __construct($feed, $categories, $number_of_posts_to_show){
 		$this->data = json_decode($feed, true);
 		if (!is_array($this->data)){
 			throw new InvalidArgumentException(
 				"JSON Error #".json_last_error().
 				". see http://php.net/manual/en/function.json-last-error.php"
+			);
+		}
+
+		if(is_int($categories)){
+			$this->categories[]= $categories;
+		} else {
+			if(!is_array($categories)){
+				throw new InvalidArgumentException(
+					"category IDs must be passed in an array"
+				);
+			}
+			foreach($categories as $category){
+				if(is_int($category) && $category > 0){
+					$this->categories[]= $category;
+				} else {
+					throw new InvalidArgumentException(
+						"category IDs must a positive integer"
+					);
+				}
+			}
+		}
+
+		if(is_int($number_of_posts_to_show) && $number_of_posts_to_show > 0){
+			$this->number_of_posts_to_show = $number_of_posts_to_show;
+		} else {
+			throw new InvalidArgumentException(
+				"number of posts to show must a positive integer"
 			);
 		}
 	}
