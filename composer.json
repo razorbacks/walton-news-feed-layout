@@ -7,5 +7,8 @@
             "email": "jpuckett@walton.uark.edu"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.6"
+    }
 }
