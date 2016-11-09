@@ -13,11 +13,17 @@ class Generator {
 	public function __construct($feed, $categories, $number_of_posts_to_show){
 		$this->views = __DIR__.'/../views';
 
+		$feed = utf8_encode($feed);
 		$this->data = json_decode($feed, true);
 		if (!is_array($this->data)){
 			throw new InvalidArgumentException(
 				"JSON Error #".json_last_error().
 				". see http://php.net/manual/en/function.json-last-error.php"
+			);
+		}
+		if(empty($this->news[0]["link"])){
+			throw new InvalidArgumentException(
+				"Feed is empty"
 			);
 		}
 
