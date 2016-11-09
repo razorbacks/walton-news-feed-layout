@@ -1,4 +1,9 @@
 <?php
+$html_opener = "
+<div data-uark-news-widget-config='https://wordpress.uark.edu/business/uark-news-widget/new-homepage-feed/' class='uark-news-embed'>
+    <div class='col-md-12 news-item-oldschool'>
+";
+
 $html_block = "
 <div class='media'>
 <a class='pull-left' href='$item[link]'>
@@ -9,4 +14,16 @@ $html_block = "
     $item[excerpt]
 </div>
 </div>
+";
+
+$html_closer = "
+    </div>
+</div>
+<style>
+@media only screen and (min-width: 480px){
+  .media img {
+      width: 128px;
+  }
+}
+</style>
 ";

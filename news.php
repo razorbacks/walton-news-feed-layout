@@ -44,27 +44,14 @@ foreach ($news as $item){
 
 }
 
-$final_output = "
-<div data-uark-news-widget-config='https://wordpress.uark.edu/business/uark-news-widget/new-homepage-feed/' class='uark-news-embed'>
-    <div class='col-md-12 news-item-oldschool'>
-";
+$final_output = $html_opener;
 
 foreach ($featured_items as $featured_item)
   $final_output .= "$featured_item";
 foreach ($regular_items as $regular_item)
   $final_output .= "$regular_item";
 
-$final_output .= "
-    </div>
-</div>
-<style>
-@media only screen and (min-width: 480px){
-  .media img {
-      width: 128px;
-  }
-}
-</style>
-";
+$final_output .= $html_closer;
 
 $somecontent = $final_output; 
 
