@@ -382,7 +382,7 @@
                 
                 <img class="img-responsive" src="http://waltoncollege.uark.edu/temp/walton-web/images/cat.jpg">
                 
-      <div id="php_include_div"><?php include("../feed.html") ?></div>
+      <div id="php_include_div"><?php include("../bin/feed.html") ?></div>
         
       <section class="gray" id="section-footer" style="padding: 10px 0px 20px 0px;">
          <div class="container">
