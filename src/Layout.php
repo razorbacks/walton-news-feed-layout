@@ -2,18 +2,19 @@
 namespace razorbacks\walton\news\feed;
 
 use InvalidArgumentException;
+use Twig_Environment;
+use Twig_Loader_Filesystem;
 
 class Layout {
-	protected $data;
+	protected $news;
 	protected $categories;
 	protected $number_of_posts_to_show;
 	protected $default_thumbnail = "https://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
-	protected $view;
 	protected $html;
 
 	public function __construct($feed, $categories, $count, $view){
-		$this->view = __DIR__."/../views/$view.php";
-		if(!file_exists($this->view)){
+		$views = __DIR__."/../views";
+		if(!file_exists("$views/$view.twig.html")){
 			throw new InvalidArgumentException(
 				"$view does not exist."
 			);
@@ -60,10 +61,11 @@ class Layout {
 			);
 		}
 
-		$this->build();
+		$twig = new Twig_Environment(new Twig_Loader_Filesystem($views));
+		$this->build($twig->loadTemplate("$view.twig.html"));
 	}
 
-	protected function build(){
+	protected function build($template){
 		$featured_items = array();
 		$regular_items = array();
 		$count = 0;
@@ -91,31 +93,24 @@ class Layout {
 				continue;
 			}
 
-			if(!empty($item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"]))
-				$thumbnail = str_replace("\\","",$item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"]);
-			else
-				$thumbnail = $this->default_thumbnail;
+			if(!empty($item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"])){
+				$item['thumbnail'] = str_replace("\\","",$item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"]);
+			} else {
+				$item['thumbnail'] = $this->default_thumbnail;
+			}
 
 			$item['title'] = htmlentities($item['title']);
-			require($this->view);
 
 			if ($featured){
-				$featured_items []= "$html_block";
+				$featured_items []= $item;
 			} else {
-				$regular_items []= "$html_block";
+				$regular_items  []= $item;
 			}
 		}
 
-		$final_output = $html_opener;
+		$output = array_merge($featured_items, $regular_items);
 
-		foreach ($featured_items as $featured_item){
-			$final_output .= "$featured_item";
-		}
-		foreach ($regular_items as $regular_item){
-			$final_output .= "$regular_item";
-		}
-
-		$this->html = $final_output.$html_closer;
+		$this->html = $template->render(array('output' => $output));
 	}
 
 	public function __toString(){
