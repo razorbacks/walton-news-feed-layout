@@ -4,7 +4,7 @@
 
 <div class="container">
 	<h2>Create</h2>
-	<form class="form-horizontal">
+	<form id="layout-form" class="form-horizontal">
 		<div class="form-group">
 			<label for="categories" class="control-label col-sm-2">Categories:</label>
 			<div class="col-sm-10">
@@ -32,20 +32,20 @@
 			<h3>Preview</h3>
 			<div class="row">
 				<div class="col-sm-4">
-					<p><a href="college-interior.php" class="btn btn-default" target="_blank">College Interior</a></p>
+					<p><button type="submit" formmethod="GET" formaction="college-interior.php" class="btn btn-default btn-preview">College Interior</button></p>
 				</div>
 				<div class="col-sm-4">
-					<p><a href="full-width-interior-page.php" class="btn btn-default" target="_blank">Full-Width Interior</a></p>
+					<p><button type="submit" formmethod="GET" formaction="full-width-interior-page.php" class="btn btn-default btn-preview">Full-Width Interior</button></p>
 				</div>
 				<div class="col-sm-4">
-					<p><a href="two-column-interior-page.php" class="btn btn-default" target="_blank">Two-Column Interior</a></p>
+					<p><button type="submit" formmethod="GET" formaction="two-column-interior-page.php" class="btn btn-default btn-preview">Two-Column Interior</button></p>
 				</div>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button id="btn-submit" type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</div>
 	</form>
@@ -56,3 +56,12 @@
 	width: 100% !important;
 }
 </style>
+
+<script>
+$(".btn-preview").click(function(){
+	$('#layout-form').attr('target', '_blank');
+});
+$("#btn-submit").click(function(){
+	$('#layout-form').attr('target', '');
+});
+</script>
