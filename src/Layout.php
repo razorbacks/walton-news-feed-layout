@@ -111,7 +111,11 @@ class Layout {
 		$this->html = $template->render(array('output' => $output));
 	}
 
-	public function __toString(){
+	public function render(){
 		return $this->html;
+	}
+
+	public function __toString(){
+		return $this->render();
 	}
 }
