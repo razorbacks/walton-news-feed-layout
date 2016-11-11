@@ -37,7 +37,7 @@ foreach ($news as $item){
     $thumbnail = $default_thumbnail;
 
   $item['title'] = htmlentities($item['title']);
-  require(__DIR__."/../templates/$template");
+  require(__DIR__."/../views/$template");
 
   if ($featured) $featured_items []= "$html_block";
   else $regular_items []= "$html_block";
