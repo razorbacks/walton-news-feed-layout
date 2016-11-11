@@ -34,25 +34,22 @@ class Layout {
 			);
 		}
 
-		if(is_int($categories)){
-			$this->categories[]= $categories;
-		} else {
-			if(!is_array($categories)){
+		if(!is_array($categories)){
+			$categories = array($categories);
+		}
+
+		foreach($categories as $category){
+			$category = filter_var($category, FILTER_VALIDATE_INT);
+			if(is_int($category) && $category > 0){
+				$this->categories[]= $category;
+			} else {
 				throw new InvalidArgumentException(
-					"category IDs must be passed in an array"
+					"category IDs must be a positive integer"
 				);
-			}
-			foreach($categories as $category){
-				if(is_int($category) && $category > 0){
-					$this->categories[]= $category;
-				} else {
-					throw new InvalidArgumentException(
-						"category IDs must a positive integer"
-					);
-				}
 			}
 		}
 
+		$count = filter_var($count, FILTER_VALIDATE_INT);
 		if(is_int($count) && $count > 0){
 			$this->number_of_posts_to_show = $count;
 		} else {
