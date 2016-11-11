@@ -99,8 +99,6 @@ class Layout {
 				$item['thumbnail'] = $this->default_thumbnail;
 			}
 
-			$item['title'] = htmlentities($item['title']);
-
 			if ($featured){
 				$featured_items []= $item;
 			} else {
