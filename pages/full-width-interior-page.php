@@ -414,7 +414,7 @@
                         
                         
                         
-               <div id="php_include_div"><?php include("../bin/feed.html") ?></div>
+               <div id="php_include_div"><?php include(__DIR__.'/preview.php') ?></div>
                 
             </div>
          </div>
