@@ -4,18 +4,18 @@ use razorbacks\walton\news\feed\Layout;
 class LayoutTest extends PHPUnit_Framework_TestCase {
 	public function outputViewDataProvider(){
 		return array(
-			'list' => array('list'),
+			'list' => array(array(40, 22), 4, 'list'),
 		);
 	}
 
 	/**
 	 * @dataProvider outputViewDataProvider
 	 */
-	public function testCanGenerateOutput($output){
+	public function testCanGenerateOutput($categories, $count, $view){
 		$json     = file_get_contents(__DIR__."/json/posts.json");
-		$expected = file_get_contents(__DIR__."/html/$output.html");
+		$expected = file_get_contents(__DIR__."/html/$view.html");
 
-		$layout = new Layout($json, array(40, 22), 4, $output);
+		$layout = new Layout($json, $categories, $count, $view);
 		$actual = $layout->render();
 
 		$this->assertSame((string)$layout, $actual);
