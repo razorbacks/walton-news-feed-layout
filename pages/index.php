@@ -44,6 +44,16 @@
 		</div>
 
 		<div class="form-group">
+			<label for="view" class="control-label col-sm-2">Schedule:</label>
+			<div class="col-sm-10">
+				<select name="schedule" required class="form-control">
+					<option value="hourly">Hourly</option>
+					<option value="daily">Daily</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button id="btn-submit" type="submit" class="btn btn-primary">Submit</button>
 			</div>
