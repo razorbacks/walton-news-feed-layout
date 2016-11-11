@@ -28,6 +28,21 @@
 			</div>
 		</div>
 
+		<div class="col-sm-offset-2 col-sm-10 well">
+			<h3>Preview</h3>
+			<div class="row">
+				<div class="col-sm-4">
+					<p><a href="college-interior.php" class="btn btn-default" target="_blank">College Interior</a></p>
+				</div>
+				<div class="col-sm-4">
+					<p><a href="full-width-interior-page.php" class="btn btn-default" target="_blank">Full-Width Interior</a></p>
+				</div>
+				<div class="col-sm-4">
+					<p><a href="two-column-interior-page.php" class="btn btn-default" target="_blank">Two-Column Interior</a></p>
+				</div>
+			</div>
+		</div>
+
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-primary">Submit</button>
