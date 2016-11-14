@@ -8,6 +8,7 @@ install:
   - composer config -g -- disable-tls true
   - composer install --no-dev
 script:
+  - ./tests/lint.bash
   - phpunit --coverage-clover=coverage.xml
 after_success:
   - bash <(curl -s https://codecov.io/bash)
