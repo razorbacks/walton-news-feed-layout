@@ -414,7 +414,7 @@
                         
                         
                         
-               <div id="php_include_div"><?php include(__DIR__.'/preview.php') ?></div>
+               <div id="php_include_div"><?php include(__DIR__.'/getlayout.php') ?></div>
                 
             </div>
          </div>
