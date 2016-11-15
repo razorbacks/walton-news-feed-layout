@@ -3,29 +3,14 @@
 		<tr><th>Name</th><th>Next Runtime</th><th>Command</th></tr>
 	</thead>
 	<tbody>
+
 <?php
-
 require_once __DIR__.'/../vendor/autoload.php';
-use Crontab\Crontab;
-use Crontab\Job;
+use razorbacks\walton\news\feed\CustomCrontab;
 
-$crontab = new Crontab();
+$crontab = new CustomCrontab();
 
-$jobs = $crontab->getJobs();
-
-function getNextRuntime(Job $job){
-	$date = new DateTime(date('h:i:s'));
-	$dminute = (int)$date->format('i');
-	$jminute = (int)$job->getMinute();
-
-	// if minute passed, increment hour
-	if($jminute <= $dminute){
-		$date->modify("+1 hour");
-	}
-
-	$date->setTime((int)$date->format('h'), $jminute);
-	return $date->format('h:i A');
-}
+$jobs = $crontab->getCustomJobs();
 
 foreach($jobs as $job){
 	echo "<tr>";
@@ -33,7 +18,7 @@ foreach($jobs as $job){
 	$name = $job->getComments();
 	echo "<td>$name</td>";
 
-	$time = getNextRuntime($job);
+	$time = $job->getNextRuntime();
 	echo "<td>$time</td>";
 
 	$command = $job->getCommand();
@@ -41,6 +26,7 @@ foreach($jobs as $job){
 
 	echo "</tr>\n";
 }
+
 ?>
 
 	</tbody>
