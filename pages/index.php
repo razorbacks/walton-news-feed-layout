@@ -13,6 +13,10 @@
 	<!-- Bootstrap -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Datatables -->
+	<link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -59,12 +63,9 @@
 		</div>
 
 		<div class="form-group">
-			<label for="view" class="control-label col-sm-2">Schedule:</label>
+			<label for="comments" class="control-label col-sm-2">Name:</label>
 			<div class="col-sm-10">
-				<select name="schedule" required class="form-control">
-					<option value="hourly">Hourly</option>
-					<option value="daily">Daily</option>
-				</select>
+				<input type="text" name="comments" required class="form-control">
 			</div>
 		</div>
 
@@ -74,6 +75,10 @@
 			</div>
 		</div>
 	</form>
+
+	<h2>View</h2>
+	<?php require __DIR__.'/crontab.php'; ?>
+
 </div>
 
 <style>
