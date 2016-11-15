@@ -26,10 +26,29 @@ class CustomCrontab extends Crontab {
 			)
 		);
 	}
+
 	public function getCustomJobs(){
 		foreach($this->getJobs() as $job){
 			$jobs []= $this->castJobToCustomJob($job);
 		}
 		return $jobs;
+	}
+
+	public function getAnOpenMinute(){
+		// minutes between 5-55  to avoid on the hour jobs
+		for($i = 5; $i < 56; $i++){
+			$open []= $i;
+		}
+
+		// minutes that are taken by other jobs
+		foreach($this->getJobs() as $job){
+			$minute = filter_var($job->getMinute(), FILTER_VALIDATE_INT);
+			if(is_int($minute)){
+				$taken []= $minute;
+			}
+		}
+
+		$available = array_diff($open, $taken);
+		return $available[array_rand($available)];
 	}
 }
