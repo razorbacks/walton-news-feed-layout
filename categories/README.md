@@ -1,6 +1,6 @@
 # Topic Categories
 
-`cats.html` is a snippet cut from [the topics sidenav][1]
+`scraped.html` is a snippet cut from [the topics sidenav][1]
 wherein the category IDs are paired with the name.
 
 Use `parse.php` to generate the categories selector view with
