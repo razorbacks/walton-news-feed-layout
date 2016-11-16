@@ -25,6 +25,13 @@
 	<h2>Create</h2>
 	<form id="layout-form" class="form-horizontal">
 		<div class="form-group">
+			<label for="comments" class="control-label col-sm-2">Name:</label>
+			<div class="col-sm-10">
+				<input type="text" name="comments" required class="form-control">
+			</div>
+		</div>
+
+		<div class="form-group">
 			<label for="categories" class="control-label col-sm-2">Categories:</label>
 			<div class="col-sm-10">
 				<?php require __DIR__.'/pages/categories.select.html'; ?>
@@ -59,13 +66,6 @@
 				<div class="col-sm-4">
 					<p><button type="submit" formmethod="GET" formaction="pages/previews/two-column-interior-page.php" class="btn btn-default btn-preview">Two-Column Interior</button></p>
 				</div>
-			</div>
-		</div>
-
-		<div class="form-group">
-			<label for="comments" class="control-label col-sm-2">Name:</label>
-			<div class="col-sm-10">
-				<input type="text" name="comments" required class="form-control">
 			</div>
 		</div>
 
