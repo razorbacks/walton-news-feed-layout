@@ -4,9 +4,9 @@ namespace razorbacks\walton\news\feed;
 use Crontab\Crontab;
 use Crontab\Job;
 
-class CustomCrontab extends Crontab {
-	protected function castJobToCustomJob(Job $job) {
-		$class = __NAMESPACE__ . '\CustomJob';
+class Scheduler extends Crontab {
+	protected function castJobToPublication(Job $job) {
+		$class = __NAMESPACE__ . '\Publication';
 		/**
 		* This is a beautifully ugly hack.
 		* https://gist.github.com/duaiwe/960035
@@ -27,11 +27,11 @@ class CustomCrontab extends Crontab {
 		);
 	}
 
-	public function getCustomJobs(){
+	public function getPublications(){
 		foreach($this->getJobs() as $job){
-			$jobs []= $this->castJobToCustomJob($job);
+			$publications []= $this->castJobToPublication($job);
 		}
-		return $jobs;
+		return $publications;
 	}
 
 	public function getAnOpenMinute(){

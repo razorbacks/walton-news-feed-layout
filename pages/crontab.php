@@ -6,13 +6,13 @@
 
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
-use razorbacks\walton\news\feed\CustomCrontab;
+use razorbacks\walton\news\feed\Scheduler;
 
-$crontab = new CustomCrontab();
+$scheduler = new Scheduler();
 
-$jobs = $crontab->getCustomJobs();
 
-foreach($jobs as $job){
+
+foreach($scheduler->getPublications() as $job){
 	echo "<tr>";
 
 	$name = $job->getComments();
