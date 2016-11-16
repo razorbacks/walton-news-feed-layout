@@ -4,6 +4,7 @@ namespace razorbacks\walton\news\feed;
 use Crontab\Job;
 use DateTime;
 use Exception;
+use InvalidArgumentException;
 
 class Publication extends Job {
 	protected $categories;
@@ -45,5 +46,21 @@ class Publication extends Job {
 			$this->importCategories();
 		}
 		return $this->categories;
+	}
+
+	public function setCategories($categories){
+		if(!is_array($categories)){
+			throw new InvalidArgumentException('Categories must be in array.');
+		}
+		foreach($categories as &$category){
+			$category = filter_var($category, FILTER_VALIDATE_INT);
+			if(!is_int($category)){
+				throw new InvalidArgumentException("Category must be integer.");
+			}
+			if($category < 1){
+				throw new InvalidArgumentException("Category must be positive. $category given.");
+			}
+		}
+		$this->categories = $categories;
 	}
 }
