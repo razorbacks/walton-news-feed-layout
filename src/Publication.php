@@ -8,6 +8,7 @@ use InvalidArgumentException;
 
 class Publication extends Job {
 	protected $categories;
+	protected $queryString;
 
 	public function getNextRuntime(){
 		$date = new DateTime(date('h:i:s'));
@@ -24,15 +25,18 @@ class Publication extends Job {
 	}
 
 	protected function getQueryString(){
-		$command = $this->getCommand();
+		if(empty($this->queryString)){
+			$command = $this->getCommand();
 
-		// break off query string
-		if (strpos($command, '?') === false) {
-			throw new Exception('No query string found.');
+			// break off query string
+			if (strpos($command, '?') === false) {
+				throw new Exception('No query string found.');
+			}
+			$pieces = explode('?', $command);
+			$pieces = explode(' ', $pieces[1]);
+			$this->queryString = $pieces[0];
 		}
-		$pieces = explode('?', $command);
-		$pieces = explode(' ', $pieces[1]);
-		return $pieces[0];
+		return $this->queryString;
 	}
 
 	protected function importCategories(){
