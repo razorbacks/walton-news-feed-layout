@@ -38,7 +38,7 @@ class Publication extends Job {
 			throw new Exception('No categories found.');
 		}
 		parse_str($query);
-		$this->categories = $categories;
+		$this->setCategories($categories);
 	}
 
 	public function getCategories(){
@@ -61,6 +61,7 @@ class Publication extends Job {
 				throw new InvalidArgumentException("Category must be positive. $category given.");
 			}
 		}
+		sort($categories);
 		$this->categories = $categories;
 	}
 }
