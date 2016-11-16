@@ -27,7 +27,7 @@
 		<div class="form-group">
 			<label for="categories" class="control-label col-sm-2">Categories:</label>
 			<div class="col-sm-10">
-				<?php require __DIR__.'/../views/categories.select.html'; ?>
+				<?php require __DIR__.'/pages/categories.select.html'; ?>
 			</div>
 		</div>
 
@@ -51,13 +51,13 @@
 			<h3>Preview</h3>
 			<div class="row">
 				<div class="col-sm-4">
-					<p><button type="submit" formmethod="GET" formaction="college-interior.php" class="btn btn-default btn-preview">College Interior</button></p>
+					<p><button type="submit" formmethod="GET" formaction="pages/previews/college-interior.php" class="btn btn-default btn-preview">College Interior</button></p>
 				</div>
 				<div class="col-sm-4">
-					<p><button type="submit" formmethod="GET" formaction="full-width-interior-page.php" class="btn btn-default btn-preview">Full-Width Interior</button></p>
+					<p><button type="submit" formmethod="GET" formaction="pages/previews/full-width-interior-page.php" class="btn btn-default btn-preview">Full-Width Interior</button></p>
 				</div>
 				<div class="col-sm-4">
-					<p><button type="submit" formmethod="GET" formaction="two-column-interior-page.php" class="btn btn-default btn-preview">Two-Column Interior</button></p>
+					<p><button type="submit" formmethod="GET" formaction="pages/previews/two-column-interior-page.php" class="btn btn-default btn-preview">Two-Column Interior</button></p>
 				</div>
 			</div>
 		</div>
@@ -77,7 +77,7 @@
 	</form>
 
 	<h2>View</h2>
-	<?php require __DIR__.'/crontab.php'; ?>
+	<?php require __DIR__.'/pages/crontab.php'; ?>
 
 </div>
 

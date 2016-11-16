@@ -8,7 +8,7 @@ Use `parse.php` to generate the categories selector view with
 Because it's static content at this point, you should save the snippet
 for inclusion in another page.
 
-    php parse.php > categories.select.html
+    php parse.php > pages/categories.select.html
 
   [1]:https://wordpress.uark.edu/business/
   [2]:https://select2.github.io/
