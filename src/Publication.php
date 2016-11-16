@@ -8,7 +8,8 @@ use InvalidArgumentException;
 
 class Publication extends Job {
 	protected $categories;
-	protected $queryString;
+	protected $count;
+	protected $view;
 
 	public function getNextRuntime(){
 		$date = new DateTime(date('h:i:s'));
@@ -24,37 +25,34 @@ class Publication extends Job {
 		return $date->format('h:i A');
 	}
 
-	protected function getQueryString(){
-		if(empty($this->queryString)){
-			$command = $this->getCommand();
+	protected function importQueryString(){
+		$command = $this->getCommand();
 
-			// break off query string
-			if (strpos($command, '?') === false) {
-				throw new Exception('No query string found.');
-			}
-			$pieces = explode('?', $command);
-			$pieces = explode(' ', $pieces[1]);
-			$this->queryString = $pieces[0];
+		// break off query string
+		if (strpos($command, '?') === false) {
+			throw new Exception('No query string found.');
 		}
-		return $this->queryString;
-	}
-
-	protected function importCategories(){
-		$query = $this->getQueryString();
-
-		// get the categories
-		if (strpos($query, 'categories') === false) {
-			throw new Exception('No categories found.');
-		}
+		$pieces = explode('?', $command);
+		$pieces = explode(' ', $pieces[1]);
+		$query = $pieces[0];
 		parse_str($query);
-		$this->setCategories($categories);
+
+		// get categories, count, and view
+		foreach(array('categories', 'count', 'view') as $property){
+			if (strpos($query, $property) === false) {
+				throw new Exception("No $property found in query string.");
+			}
+			// use custom setters with variable variables from parse_str
+			$set = "set$property";
+			$this->$set($$property);
+		}
 	}
 
-	public function getCategories(){
-		if(empty($this->categories)){
-			$this->importCategories();
+	public function __get($property){
+		if(empty($this->$property)){
+			$this->importQueryString();
 		}
-		return $this->categories;
+		return $this->$property;
 	}
 
 	public function setCategories($categories){
@@ -72,6 +70,32 @@ class Publication extends Job {
 		}
 		sort($categories);
 		$this->categories = $categories;
+	}
+
+	public function setCount($count){
+		$count = filter_var($count, FILTER_VALIDATE_INT);
+		if(!is_int($count)){
+			throw new InvalidArgumentException("Count must be integer.");
+		}
+		if($count < 1){
+			throw new InvalidArgumentException("Count must be positive. $count given.");
+		}
+		$this->count = $count;
+	}
+
+	public function setView($view){
+		if(!is_string($view)){
+			throw new InvalidArgumentException("View name must be a string.");
+		}
+
+		$views = __DIR__."/../views";
+		if(!file_exists("$views/$view.twig.html")){
+			throw new InvalidArgumentException(
+				"$view does not exist."
+			);
+		}
+
+		$this->view = $view;
 	}
 
 	public function getPublicationFilename(){
