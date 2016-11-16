@@ -6,7 +6,7 @@
 
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
-use razorbacks\walton\news\feed\Scheduler;
+use razorbacks\walton\news\Scheduler;
 
 $scheduler = new Scheduler();
 

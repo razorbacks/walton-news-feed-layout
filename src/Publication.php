@@ -1,5 +1,5 @@
 <?php
-namespace razorbacks\walton\news\feed;
+namespace razorbacks\walton\news;
 
 use Crontab\Job;
 use DateTime;

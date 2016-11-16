@@ -1,5 +1,5 @@
 {
-	"name": "razorbacks/walton-news-feed-layout",
+	"name": "razorbacks/walton-news-publication-scheduler",
 	"license": "GPL-3.0+",
 	"authors": [
 		{
@@ -15,7 +15,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"razorbacks\\walton\\news\\feed\\": "src/"
+			"razorbacks\\walton\\news\\": "src/"
 		}
 	},
 	"require-dev": {
