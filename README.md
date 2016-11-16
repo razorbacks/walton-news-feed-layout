@@ -1,23 +1,23 @@
-# Walton College News Feed Layouts
+# Walton College News Publication Scheduler
 
-Schedule news feed layouts to be generated periodically for static inclusion.
+Schedule news publications to be generated periodically for static inclusion
+on a website.
 
 ## Getting Started
 
-The application interface is `pages/index.php`
+Requires at least PHP 5.3.3 and [cron][2].
 
-## Use Case Flows
+Install dependencies with [composer][1].
 
-### Create
+    composer install --no-dev
 
-1. Enter categories, count, layout
-2. Preview pages
-3. Schedule frequency
-4. Generate asset
+A `publications` folder must be created with accessible permissions for the
+web server user account.
 
-### Edit
+    mkdir publications
+    chmod 777 publications
 
-1. View schedules
-2. Preview pages
-3. Update
-4. Delete
+The application interface is `index.php` and is straight-forward.
+
+[1]:https://getcomposer.org/
+[2]:https://en.wikipedia.org/wiki/Cron
