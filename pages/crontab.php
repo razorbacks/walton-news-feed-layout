@@ -32,6 +32,14 @@ foreach($scheduler->getPublications() as $job){
 	</tbody>
 </table>
 
+<style>
+#cronjobs .sorting,
+#cronjobs .sorting_asc,  #cronjobs .sorting_asc_disabled,
+#cronjobs .sorting_desc, #cronjobs .sorting_desc_disabled {
+	background-position: center left;
+}
+</style>
+
 <script>
 $("#cronjobs").DataTable();
 </script>
