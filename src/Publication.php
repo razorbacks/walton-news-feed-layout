@@ -64,4 +64,10 @@ class Publication extends Job {
 		sort($categories);
 		$this->categories = $categories;
 	}
+
+	public function getPublicationFilename(){
+		$categories = $this->getCategories();
+		$categories = implode('-', $categories);
+		return "$categories.php";
+	}
 }
