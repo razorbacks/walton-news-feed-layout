@@ -11,6 +11,10 @@ class Publication extends Job {
 	protected $count;
 	protected $view;
 
+	public function __construct($array, $minute){
+		$this->initialize($array, $minute);
+	}
+
 	public function getNextRuntime(){
 		$date = new DateTime(date('h:i:s'));
 		$dminute = (int)$date->format('i');
@@ -34,7 +38,9 @@ class Publication extends Job {
 		}
 		$pieces = explode('?', $command);
 		$pieces = explode(' ', $pieces[1]);
-		$query = $pieces[0];
+		$query = trim($pieces[0],"'");
+		// unescape % signs
+		$query = str_replace('\\%', '%', $query);
 		parse_str($query);
 
 		// get categories, count, and view
@@ -73,8 +79,10 @@ class Publication extends Job {
 				throw new InvalidArgumentException("Category must be positive. $category given.");
 			}
 		}
+
 		sort($categories);
 		$this->categories = $categories;
+		return $this;
 	}
 
 	public function setCount($count){
@@ -85,7 +93,9 @@ class Publication extends Job {
 		if($count < 1){
 			throw new InvalidArgumentException("Count must be positive. $count given.");
 		}
+
 		$this->count = $count;
+		return $this;
 	}
 
 	public function setView($view){
@@ -101,6 +111,7 @@ class Publication extends Job {
 		}
 
 		$this->view = $view;
+		return $this;
 	}
 
 	public function getPublicationFilename(){
@@ -109,5 +120,38 @@ class Publication extends Job {
 		$categories = $this->__get('categories');
 		$categories = implode('-', $categories);
 		return __DIR__."/../publications/$view.$count.$categories.php";
+	}
+
+	protected function buildQueryString(){
+		$data = array(
+			'categories' => $this->__get('categories'),
+			'count'      => $this->__get('count'),
+			'view'       => $this->__get('view'),
+		);
+		$query = http_build_query($data);
+
+		// escape % for crontab
+		// http://www.ducea.com/2008/11/12/using-the-character-in-crontab-entries/
+		return str_replace('%', '\\%', $query);
+	}
+
+	public function initialize($array, $minute){
+		$this
+			->setCategories($array['categories'])
+			->setCount($array['count'])
+			->setView($array['view'])
+			->setMinute($minute)
+			->setHour('*')
+			->setDayOfMonth('*')
+			->setMonth('*')
+			->setDayOfWeek('*')
+			->setCommand(
+				'/usr/bin/php \'' .
+				__DIR__.'/../pages/getlayout.php?' .
+				$this->buildQueryString() .
+				'\' > ' . $this->getPublicationFilename()
+			)
+			->setComments($array['comments'])
+		;
 	}
 }

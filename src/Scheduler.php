@@ -28,6 +28,7 @@ class Scheduler extends Crontab {
 	}
 
 	public function getPublications(){
+		$publications = array();
 		foreach($this->getJobs() as $job){
 			$publications []= $this->castJobToPublication($job);
 		}
@@ -41,6 +42,7 @@ class Scheduler extends Crontab {
 		}
 
 		// minutes that are taken by other jobs
+		$taken = array();
 		foreach($this->getJobs() as $job){
 			$minute = filter_var($job->getMinute(), FILTER_VALIDATE_INT);
 			if(is_int($minute)){
@@ -53,5 +55,11 @@ class Scheduler extends Crontab {
 			return $open[array_rand($open)];
 		}
 		return $available[array_rand($available)];
+	}
+
+	public function createPublication($array){
+		$minute = $this->getAnOpenMinute();
+		$publication = new Publication($array, $minute);
+		$this->addJob($publication)->write();
 	}
 }

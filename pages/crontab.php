@@ -1,6 +1,6 @@
 <table id="cronjobs">
 	<thead>
-		<tr><th>Name</th><th>Next Runtime</th><th>Command</th></tr>
+		<tr><th>Name</th><th>Next Runtime</th><th>Categories</th></tr>
 	</thead>
 	<tbody>
 
@@ -10,18 +10,20 @@ use razorbacks\walton\news\Scheduler;
 
 $scheduler = new Scheduler();
 
+if(isset($_POST['categories'],$_POST['count'],$_POST['view'],$_POST['comments'])){
+	$scheduler->createPublication($_POST);
+}
 
-
-foreach($scheduler->getPublications() as $job){
+foreach($scheduler->getPublications() as $publication){
 	echo "<tr>";
 
-	$name = $job->getComments();
+	$name = $publication->getComments();
 	echo "<td>$name</td>";
 
-	$time = $job->getNextRuntime();
+	$time = $publication->getNextRuntime();
 	echo "<td>$time</td>";
 
-	$command = $job->getCommand();
+	$command = implode(',', $publication->categories);
 	echo "<td>$command</td>";
 
 	echo "</tr>\n";
