@@ -99,8 +99,10 @@ class Publication extends Job {
 	}
 
 	public function getPublicationFilename(){
-		$categories = $this->getCategories();
+		$view  = $this->__get('view');
+		$count = $this->__get('count');
+		$categories = $this->__get('categories');
 		$categories = implode('-', $categories);
-		return "$categories.php";
+		return __DIR__."/../publications/$view.$count.$categories.php";
 	}
 }
