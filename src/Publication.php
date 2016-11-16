@@ -49,6 +49,11 @@ class Publication extends Job {
 	}
 
 	public function __get($property){
+		$properties = array('categories', 'count', 'view');
+		if(!in_array($property, $properties, true)){
+			$properties = implode(', ', $properties);
+			throw new InvalidArgumentException("Only $properties are accessible");
+		}
 		if(empty($this->$property)){
 			$this->importQueryString();
 		}
