@@ -31,7 +31,8 @@ class Publication extends Job {
 			throw new Exception('No query string found.');
 		}
 		$pieces = explode('?', $command);
-		$query = $pieces[1];
+		$pieces = explode(' ', $pieces[1]);
+		$query = $pieces[0];
 
 		// get the categories
 		if (strpos($query, 'categories') === false) {
