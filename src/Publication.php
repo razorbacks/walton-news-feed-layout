@@ -23,7 +23,7 @@ class Publication extends Job {
 		return $date->format('h:i A');
 	}
 
-	protected function importCategories(){
+	protected function getQueryString(){
 		$command = $this->getCommand();
 
 		// break off query string
@@ -32,7 +32,11 @@ class Publication extends Job {
 		}
 		$pieces = explode('?', $command);
 		$pieces = explode(' ', $pieces[1]);
-		$query = $pieces[0];
+		return $pieces[0];
+	}
+
+	protected function importCategories(){
+		$query = $this->getQueryString();
 
 		// get the categories
 		if (strpos($query, 'categories') === false) {
