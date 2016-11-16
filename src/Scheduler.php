@@ -49,6 +49,9 @@ class Scheduler extends Crontab {
 		}
 
 		$available = array_diff($open, $taken);
+		if(empty($available)){
+			return $open[array_rand($open)];
+		}
 		return $available[array_rand($available)];
 	}
 }
