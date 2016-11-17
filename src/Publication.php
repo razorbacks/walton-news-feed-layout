@@ -119,7 +119,9 @@ class Publication extends Job {
 		$count = $this->__get('count');
 		$categories = $this->__get('categories');
 		$categories = implode('-', $categories);
-		return __DIR__."/../publications/$view.$count.$categories.php";
+
+		$directory  = realpath(__DIR__."/../publications");
+		return "$directory/$view.$count.$categories.php";
 	}
 
 	protected function buildQueryString(){
@@ -147,8 +149,8 @@ class Publication extends Job {
 			->setDayOfWeek('*')
 			->setCommand(
 				'/usr/bin/php \'' .
-				__DIR__.'/../pages/getlayout.php?' .
-				$this->buildQueryString() .
+				realpath(__DIR__.'/../pages/getlayout.php') .
+				'?' . $this->buildQueryString() .
 				'\' > ' . $this->getPublicationFilename()
 			)
 			->setComments($array['comments'])
