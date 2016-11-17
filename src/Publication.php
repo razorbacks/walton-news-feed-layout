@@ -15,6 +15,17 @@ class Publication extends Job {
 		$this->initialize($array, $minute);
 	}
 
+	public function setCommand($command){
+		// escape % for crontab
+		// https://github.com/yzalis/Crontab/issues/34
+		// http://www.ducea.com/2008/11/12/using-the-character-in-crontab-entries/
+		return parent::setCommand(str_replace('%', '\\\\%', $command));
+	}
+
+	public function getCommand(){
+		return str_replace('\\%', '%', parent::getCommand());
+	}
+
 	public function getNextRuntime(){
 		$date = new DateTime(date('h:i:s'));
 		$dminute = (int)$date->format('i');
@@ -39,8 +50,6 @@ class Publication extends Job {
 		$pieces = explode('?', $command);
 		$pieces = explode(' ', $pieces[1]);
 		$query = trim($pieces[0],"'");
-		// unescape % signs
-		$query = str_replace('\\%', '%', $query);
 		parse_str($query);
 
 		// get categories, count, and view
@@ -130,11 +139,7 @@ class Publication extends Job {
 			'count'      => $this->__get('count'),
 			'view'       => $this->__get('view'),
 		);
-		$query = http_build_query($data);
-
-		// escape % for crontab
-		// http://www.ducea.com/2008/11/12/using-the-character-in-crontab-entries/
-		return str_replace('%', '\\%', $query);
+		return http_build_query($data);
 	}
 
 	public function initialize($array, $minute){
