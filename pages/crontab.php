@@ -1,6 +1,11 @@
 <table id="cronjobs">
 	<thead>
-		<tr><th>Name</th><th>Next Runtime</th><th>Categories</th></tr>
+		<tr>
+			<th>Name</th>
+			<th>Next Runtime</th>
+			<th>Last Runtime</th>
+			<th>Categories</th>
+		</tr>
 	</thead>
 	<tbody>
 
@@ -20,8 +25,11 @@ foreach($scheduler->getPublications() as $publication){
 	$name = $publication->getComments();
 	echo "<td>$name</td>";
 
-	$time = $publication->getNextRuntime();
-	echo "<td>$time</td>";
+	$next = $publication->getNextRuntime();
+	echo "<td>$next</td>";
+
+	$last = $publication->getLastRuntime();
+	echo "<td>$last</td>";
 
 	$categories = implode(',', $publication->categories);
 	echo "<td>$categories</td>";

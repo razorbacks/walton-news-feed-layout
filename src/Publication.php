@@ -45,6 +45,18 @@ class Publication extends Job {
 		return $date->format('h:i A');
 	}
 
+	public function getLastRuntime(){
+		$filename = $this->getPublicationFilename();
+		$modified = filemtime($filename);
+		if($modified === false){
+			return "File doesn't exist: $filename";
+		}
+
+		$datetime = new DateTime;
+		$datetime->setTimestamp($modified);
+		return $datetime->format('Y-m-d H:i - h:i A l, F d, Y');
+	}
+
 	public function importQueryString(){
 		$command = $this->getCommand();
 
