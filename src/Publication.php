@@ -43,23 +43,23 @@ class Publication extends Job {
 	protected function importQueryString(){
 		$command = $this->getCommand();
 
-		// break off query string
-		if (strpos($command, '?') === false) {
-			throw new Exception('No query string found.');
-		}
-		$pieces = explode('?', $command);
-		$pieces = explode(' ', $pieces[1]);
-		$query = trim($pieces[0],"'");
-		parse_str($query);
+		$pieces = explode(' ', $command);
+		if(isset($pieces[2])){
+			$query = trim($pieces[2],"'");
+			parse_str($query, $array);
 
-		// get categories, count, and view
-		foreach(array('categories', 'count', 'view') as $property){
-			if (strpos($query, $property) === false) {
-				throw new Exception("No $property found in query string.");
+			// get categories, count, and view
+			foreach(array('categories', 'count', 'view') as $property){
+				if(!isset($array[$property])){
+					$this->valid = false;
+					break;
+				}
+				// use custom setters with variable variables from parse_str
+				$set = "set$property";
+				$this->$set($array[$property]);
 			}
-			// use custom setters with variable variables from parse_str
-			$set = "set$property";
-			$this->$set($$property);
+		} else {
+			$this->valid = false;
 		}
 	}
 
@@ -153,9 +153,9 @@ class Publication extends Job {
 			->setMonth('*')
 			->setDayOfWeek('*')
 			->setCommand(
-				'/usr/bin/php \'' .
+				'/usr/bin/php ' .
 				realpath(__DIR__.'/../pages/getlayout.php') .
-				'?' . $this->buildQueryString() .
+				' \'' . $this->buildQueryString() .
 				'\' > ' . $this->getPublicationFilename()
 			)
 			->setComments($array['comments'])
