@@ -71,7 +71,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button id="btn-submit" type="submit" formmethod="POST" class="btn btn-primary">Submit</button>
+				<button id="btn-submit" type="submit" formmethod="POST" class="btn btn-success">Schedule Publication</button>
 			</div>
 		</div>
 	</form>
