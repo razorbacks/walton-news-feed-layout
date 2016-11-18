@@ -2,6 +2,7 @@
 	<thead>
 		<tr>
 			<th>Name</th>
+			<th>OU Asset Code</th>
 			<th>Next Runtime</th>
 			<th>Last Runtime</th>
 			<th>Categories</th>
@@ -30,6 +31,9 @@ foreach($scheduler->getPublications() as $publication){
 	$name = $publication->getComments();
 	echo "<td>$name</td>";
 
+	$incode = $publication->getIncludeScript();
+	?><td><button data-incode="<?=$incode?>" class="btn btn-primary btn-incode">Show Code</button></td><?php
+
 	$next = $publication->getNextRuntime();
 	echo "<td>$next</td>";
 
@@ -53,6 +57,10 @@ foreach($scheduler->getPublications() as $publication){
 	</tbody>
 </table>
 
+<div style="display:none" id="dialog" title="OmniUpdate Asset Code">
+	<pre id="incode"></pre>
+</div>
+
 <style>
 #cronjobs .sorting,
 #cronjobs .sorting_asc,  #cronjobs .sorting_asc_disabled,
@@ -63,4 +71,25 @@ foreach($scheduler->getPublications() as $publication){
 
 <script>
 $("#cronjobs").DataTable();
+$( "#dialog" ).dialog({
+	autoOpen: false,
+	width: 850,
+	show: {
+		effect: "fade",
+		duration: 100
+	},
+	hide: {
+		effect: "fade",
+		duration: 100
+	}
+});
+$(".btn-incode").click(function(){
+	$("#incode").text($(this).data("incode"));
+	$("#dialog").dialog("open");
+});
 </script>
+
+<?php
+echo "<br/><pre>";
+print_r($scheduler->getPublications());
+echo "</pre>";

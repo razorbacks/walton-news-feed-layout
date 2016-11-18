@@ -161,6 +161,10 @@ class Publication extends Job {
 		return "$directory/$view.$count.$categories.html";
 	}
 
+	public function getIncludeScript(){
+		return "<?php include '".$this->getPublicationFilename()."'; ?>";
+	}
+
 	protected function buildQueryString(){
 		$data = array(
 			'categories' => $this->__get('categories'),
