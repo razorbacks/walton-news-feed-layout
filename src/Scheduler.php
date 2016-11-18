@@ -4,6 +4,7 @@ namespace razorbacks\walton\news;
 use Crontab\Crontab;
 use Crontab\Job;
 use Exception;
+use InvalidArgumentException;
 
 class Scheduler extends Crontab {
 	protected function castJobToPublication(Job $job) {
@@ -41,10 +42,18 @@ class Scheduler extends Crontab {
 				$publication = $this->castJobToPublication($job);
 			}
 			if($publication->valid){
-				$publications []= $publication;
+				$publications[$publication->getHash()] = $publication;
 			}
 		}
 		return $publications;
+	}
+
+	public function deletePublication($hash){
+		$publications = $this->getPublications();
+		if(!isset($publications[$hash])){
+			throw new InvalidArgumentException("Publication does not exist.");
+		}
+		$this->removeJob($publications[$hash])->write();
 	}
 
 	public function getAnOpenMinute(){

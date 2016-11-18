@@ -5,6 +5,7 @@
 			<th>Next Runtime</th>
 			<th>Last Runtime</th>
 			<th>Categories</th>
+			<th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,6 +18,10 @@ $scheduler = new Scheduler();
 
 if(isset($_POST['categories'],$_POST['count'],$_POST['view'],$_POST['comments'])){
 	$scheduler->createPublication($_POST);
+}
+
+if(isset($_POST['delete'])){
+	$scheduler->deletePublication($_POST['delete']);
 }
 
 foreach($scheduler->getPublications() as $publication){
@@ -33,6 +38,12 @@ foreach($scheduler->getPublications() as $publication){
 
 	$categories = implode(',', $publication->categories);
 	echo "<td>$categories</td>";
+
+	$hash = $publication->getHash();
+	?><td><form method="POST">
+		<input type="hidden"  name="delete" value="<?=$hash?>"/>
+		<button class="btn btn-danger">Delete</button>
+	</form></td><?php
 
 	echo "</tr>\n";
 }
