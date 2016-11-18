@@ -10,6 +10,7 @@ class Publication extends Job {
 	protected $categories;
 	protected $count;
 	protected $view;
+	protected $valid = true;
 
 	public function __construct($array, $minute){
 		$this->initialize($array, $minute);
@@ -27,6 +28,10 @@ class Publication extends Job {
 	}
 
 	public function getNextRuntime(){
+		if(!$this->valid){
+			return false;
+		}
+
 		$date = new DateTime(date('h:i:s'));
 		$dminute = (int)$date->format('i');
 		$jminute = (int)$this->getMinute();
@@ -40,7 +45,7 @@ class Publication extends Job {
 		return $date->format('h:i A');
 	}
 
-	protected function importQueryString(){
+	public function importQueryString(){
 		$command = $this->getCommand();
 
 		$pieces = explode(' ', $command);
@@ -64,13 +69,20 @@ class Publication extends Job {
 	}
 
 	public function __get($property){
-		$properties = array('categories', 'count', 'view');
+		if(!$this->valid){
+			return false;
+		}
+
+		$properties = array('valid', 'categories', 'count', 'view');
 		if(!in_array($property, $properties, true)){
 			$properties = implode(', ', $properties);
 			throw new InvalidArgumentException("Only $properties are accessible");
 		}
 		if(empty($this->$property)){
 			$this->importQueryString();
+		}
+		if(empty($this->$property)){
+			return false;
 		}
 		return $this->$property;
 	}
@@ -124,6 +136,10 @@ class Publication extends Job {
 	}
 
 	public function getPublicationFilename(){
+		if(!$this->valid){
+			return false;
+		}
+
 		$view  = $this->__get('view');
 		$count = $this->__get('count');
 		$categories = $this->__get('categories');

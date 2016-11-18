@@ -19,19 +19,26 @@ class Scheduler extends Crontab {
 		* we're casting it to, and then serialize the string back into an
 		* object.
 		*/
-		return unserialize(
+		$publication = unserialize(
 			preg_replace(
 				'/^O:\d+:"[^"]++"/', 
 				'O:'.strlen($class).':"'.$class.'"',
 				serialize($job)
 			)
 		);
+
+		$publication->importQueryString();
+
+		return $publication;
 	}
 
 	public function getPublications(){
 		$publications = array();
 		foreach($this->getJobs() as $job){
-			$publications []= $this->castJobToPublication($job);
+			$publication = $this->castJobToPublication($job);
+			if($publication->valid){
+				$publications []= $publication;
+			}
 		}
 		return $publications;
 	}
