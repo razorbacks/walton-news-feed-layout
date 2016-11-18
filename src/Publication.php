@@ -158,7 +158,7 @@ class Publication extends Job {
 		$categories = implode('-', $categories);
 
 		$directory  = realpath(__DIR__."/../publications");
-		return "$directory/$view.$count.$categories.php";
+		return "$directory/$view.$count.$categories.html";
 	}
 
 	protected function buildQueryString(){
