@@ -35,7 +35,11 @@ class Scheduler extends Crontab {
 	public function getPublications(){
 		$publications = array();
 		foreach($this->getJobs() as $job){
-			$publication = $this->castJobToPublication($job);
+			if($job instanceof Publication){
+				$publication = $job;
+			} else {
+				$publication = $this->castJobToPublication($job);
+			}
 			if($publication->valid){
 				$publications []= $publication;
 			}
