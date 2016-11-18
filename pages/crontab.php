@@ -88,8 +88,3 @@ $(".btn-incode").click(function(){
 	$("#dialog").dialog("open");
 });
 </script>
-
-<?php
-echo "<br/><pre>";
-print_r($scheduler->getPublications());
-echo "</pre>";
