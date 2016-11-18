@@ -4,7 +4,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="UTF-8">
-      <title>College Interior | 
+      <title>Two Column Interior Page | 
                                                                  Walton College |
                                                         University of Arkansas
                 
@@ -26,18 +26,20 @@
             OUC.props = OUC.props || {};
             
             
-                OUC.globalProps['path'] = "/test/ou-frame-templates/college-interior.php";
+                OUC.globalProps['path'] = "/test/ou-frame-templates/two-column-interior-page.php";
                 OUC.globalProps['domain'] = "www.uark.edu";
                 OUC.globalProps['index-file'] = "index";
                 OUC.globalProps['extension'] = "php";
                 OUC.globalProps['production_root'] = "";
-                OUC.pageProps['pagetype'] = "college-interior";
+                OUC.pageProps['pagetype'] = "interior";
                 OUC.pageProps['banner-region'] = "on";
+                OUC.pageProps['banner-type'] = "image";
                 OUC.pageProps['banner-location'] = "global";
-                OUC.pageProps['college-banner-type'] = "large";
-                OUC.pageProps['heading'] = "College Interior";
+                OUC.pageProps['banner-image-type'] = "short";
                 OUC.pageProps['heading-display'] = "on";
-                OUC.pageProps['breadcrumb'] = "College Interior";
+                OUC.pageProps['heading'] = "Two Column Interior Page";
+                OUC.pageProps['breadcrumb'] = "Two Column Interior Page";
+                OUC.pageProps['layout'] = "two-column";
                 OUC.pageProps['intro-text'] = "on";
             
             var key;
@@ -384,11 +386,33 @@
 <!-- end of main mega nav ul --></div>
 <!-- end of navbar-header div --> <!-- end of mega menu include -->
          </div>
-      </nav><img alt="College Interior" src="http://walton.uark.edu/images/large-banner.jpg" style="width: 100%" title="College Interior" class="img-responsive"><div id="main-container" class="container walton-extra">
-         <section class="landingPage"></section>
-         <div class="row">
-            <div class="col-md-12">
-               <h2 class="intro-headline">College Interior</h2>
+      </nav>
+      <div id="main-container" class="container">
+         <section class="landingPage hidden-xs visible-sm visible-md visible-lg">
+            <div class="container"><img alt="Two Column Interior Page" class="img-responsive" src="http://walton.uark.edu/images/short-banner.jpg" style="width: 100%" title="Two Column Interior Page"><div class="img-responsive" id="site-title-container">
+                  <h1 class="site-title" id="site-title-h1id"><a href="/">Sam M. Walton College of Business</a></h1>
+               </div>
+            </div>
+         </section>
+         <div class="row" id="content">
+            <div class="col-md-3" id="sidebar">
+               <p class="hidden-md hidden-lg"><button id="menuButton" class="btn btn-default" data-target=".navbar-ex2-collapse" data-toggle="collapse" type="button"><i class="icon-chevron-down"></i> Menu</button></p>
+               <nav class="collapse navbar-collapse sidenav navbar-ex2-collapse" role="navigation">
+                  <ul class="nav nav-stacked" id="side-nav"><li><a href="/about/index.php">About</a></li>
+<li><a href="/directory/index.php">Department Directory</a></li>
+</ul>
+               </nav>
+               <nav class="collapse navbar-collapse sidenav navbar-ex2-collapse" style="margin-top: 40px; width: 75%; background-color: #f5f5f5; padding: 15px; -webkit-border-radius: 7px 7px 7px 7px;-moz-border-radius: 7px 7px 7px 7px;border-radius: 7px 7px 7px 7px;">
+                  <ul class="nav nav-stacked"><li style="font-size: 14.5px; margin-bottom: 12px; padding-left: 9px;"><a href="/future-students.php">Future Students</a></li>
+<li style="font-size: 14.5px; margin-bottom: 12px; padding-left: 9px;"><a href="/about/fayetteville.php">Life in Fayetteville</a></li>
+<li style="font-size: 14.5px; margin-bottom: 12px; padding-left: 9px;"><a href="/about/">About Walton College</a></li>
+<li style="font-size: 14.5px; margin-bottom: 12px; padding-left: 9px;"><a href="/invest/">Invest In Walton</a></li>
+</ul>
+               </nav>
+               <address></address>
+            </div>
+            <div class="col-md-9">
+               <h2 class="intro-headline">Two Column Interior Page</h2>
                <ul class="breadcrumb">
                   <li><a href="http://www.uark.edu/" class="uark-home">
                                                                 U of A
@@ -396,14 +420,20 @@
                   <li><a href="/">Walton College</a></li>
                   <li><a href="/test/"></a></li>
                   <li><a href="/test/ou-frame-templates/">Page Title</a></li>
-                  <li>College Interior</li>
+                  <li>Two Column Interior Page</li>
                </ul>
-               <p class="lead">Intro Text</p>
+               <div class="row">
+                  <div class="col-md-12">
+                     <p class="lead">Intro Text</p>
+                  </div>
+               </div>
+                        
+                        
+                        
+               <div id="php_include_div"><?php require __DIR__.'/../getlayout.php'; ?></div>
+                
             </div>
          </div>
-
-         <div id="php_include_div"><?php include(__DIR__.'/preview.php') ?></div>
-                
       </div>
       <section class="gray" id="section-footer" style="padding: 10px 0px 20px 0px;">
          <div class="container">
@@ -535,7 +565,7 @@
 </div>
 </footer>
 <script>
-                        var current_path = "/test/ou-frame-templates/college-interior.php";
+                        var current_path = "/test/ou-frame-templates/two-column-interior-page.php";
                 </script><!-- javascripts that don't need to go in the head can go here -->
 
 
@@ -596,6 +626,14 @@ $( "#sidebar .nav-stacked" ).clone().addClass( "visible-xs-block hidden-sm hidde
 
 
 <script>
+                    $("#side-nav > li > ul").parent().addClass("expanded");
+                    $("li.expanded > a").append(" <i class='fa fa-angle-down'></i>");
+                    $("#side-nav > li.expanded > a").click (function (e) {
+                            e.preventDefault();
+                            $(this).next('ul').slideToggle(200);
+                        $(this).find("i").toggleClass("fa-angle-down fa-angle-up")
+                    });
+                </script><script>
                         $(function () {
                         var isMobile = navigator.userAgent.match(/Android|webOS|iPhone|BlackBerry|IEMobile|Opera Mini|Opera Mobile| Windows Phone/);
                         if (isMobile) {
@@ -619,7 +657,7 @@ document.getElementById("directedit-footer").innerHTML = anchor;
 }
 window.onload = function(){ directedit(); }
 //--></script>
-      <!--2016-04-05T15:44:00Z--><div id="hidden">
-         <a rel="nofollow" id="oudirectedit" href="http://a.omniupdate.uark.edu/10?skin=oucampus&amp;account=walton&amp;site=walton&amp;action=de&amp;path=/test/ou-frame-templates/college-interior.pcf" ><span class="hidden">Edit webpage</span></a>
+      <!--2016-04-05T15:51:00Z--><div id="hidden">
+         <a rel="nofollow" id="oudirectedit" href="http://a.omniupdate.uark.edu/10?skin=oucampus&amp;account=walton&amp;site=walton&amp;action=de&amp;path=/test/ou-frame-templates/two-column-interior-page.pcf" ><span class="hidden">Edit webpage</span></a>
       </div><span id="directedit-footer"></span></body>
 </html>

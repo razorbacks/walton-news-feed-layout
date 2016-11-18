@@ -1,5 +1,5 @@
 <?php
-use razorbacks\walton\news\feed\Layout;
+use razorbacks\walton\news\Layout;
 
 class LayoutTest extends PHPUnit_Framework_TestCase {
 	public function outputViewDataProvider(){

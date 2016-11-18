@@ -1,6 +1,10 @@
 <?php
 
-use razorbacks\walton\news\feed\Layout;
+use razorbacks\walton\news\Layout;
+
+if(isset($argv[1])){
+	parse_str($argv[1], $_GET);
+}
 
 if(!isset($_GET['categories'],$_GET['count'],$_GET['view'])){
 	echo "categories, count, and view required.";
