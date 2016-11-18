@@ -13,11 +13,18 @@ Install dependencies with [composer][1].
 
     composer install --no-dev
 
-A `publications` folder must be created with accessible permissions for the
+A `publications` folder must be created with write permissions for the
 web server user account.
+
+Permissive example granting everyone full access:
 
     mkdir publications
     chmod 777 publications
+
+More secure example for web server running as `www-data`
+
+    mkdir publications
+    chown www-data publications
 
 The application interface is `index.php` and is straight-forward.
 
