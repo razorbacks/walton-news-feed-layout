@@ -32,7 +32,7 @@ foreach($scheduler->getPublications() as $publication){
 	echo "<td>$name</td>";
 
 	$incode = $publication->getIncludeScript();
-	?><td><button data-incode="<?=$incode?>" class="btn btn-primary btn-incode">Show Code</button></td><?php
+	?><td><button data-incode="<?php echo $incode; ?>" class="btn btn-primary btn-incode">Show Code</button></td><?php
 
 	$next = $publication->getNextRuntime();
 	echo "<td>$next</td>";
@@ -45,7 +45,7 @@ foreach($scheduler->getPublications() as $publication){
 
 	$hash = $publication->getHash();
 	?><td><form method="POST">
-		<input type="hidden"  name="delete" value="<?=$hash?>"/>
+		<input type="hidden"  name="delete" value="<?php echo $hash; ?>"/>
 		<button class="btn btn-danger">Delete</button>
 	</form></td><?php
 
