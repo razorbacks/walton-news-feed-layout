@@ -4,6 +4,7 @@
 			<th>Name</th>
 			<th>OU Asset Code</th>
 			<th>Next Runtime</th>
+			<th>Run Now</th>
 			<th>Last Runtime</th>
 			<th>Categories</th>
 			<th>Delete</th>
@@ -17,12 +18,19 @@ use razorbacks\walton\news\Scheduler;
 
 $scheduler = new Scheduler();
 
+// create
 if(isset($_POST['categories'],$_POST['count'],$_POST['view'],$_POST['comments'])){
 	$scheduler->createPublication($_POST);
 }
 
+// delete
 if(isset($_POST['delete'])){
 	$scheduler->deletePublication($_POST['delete']);
+}
+
+// run
+if(isset($_POST['run'])){
+	$scheduler->runPublication($_POST['run']);
 }
 
 foreach($scheduler->getPublications() as $publication){
@@ -36,6 +44,12 @@ foreach($scheduler->getPublications() as $publication){
 
 	$next = $publication->getNextRuntime();
 	echo "<td>$next</td>";
+
+	$hash = $publication->getHash();
+	?><td><form method="POST">
+		<input type="hidden"  name="run" value="<?php echo $hash; ?>"/>
+		<button class="btn btn-info">Publish Now</button>
+	</form></td><?php
 
 	$last = $publication->getLastRuntime();
 	echo "<td>$last</td>";

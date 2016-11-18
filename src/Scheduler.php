@@ -48,6 +48,18 @@ class Scheduler extends Crontab {
 		return $publications;
 	}
 
+	public function runPublication($hash){
+		$publications = $this->getPublications();
+		if(!isset($publications[$hash])){
+			throw new InvalidArgumentException("Publication does not exist.");
+		}
+
+		exec($publications[$hash]->getCommand(), $output, $return);
+		if($return != 0){
+			throw new Exception('Run Publication Error: '.implode(PHP_EOL, $output));
+		}
+	}
+
 	public function deletePublication($hash){
 		$publications = $this->getPublications();
 		if(!isset($publications[$hash])){
