@@ -3,6 +3,7 @@ namespace razorbacks\walton\news;
 
 use Crontab\Crontab;
 use Crontab\Job;
+use Exception;
 
 class Scheduler extends Crontab {
 	protected function castJobToPublication(Job $job) {
@@ -60,6 +61,13 @@ class Scheduler extends Crontab {
 	public function createPublication($array){
 		$minute = $this->getAnOpenMinute();
 		$publication = new Publication($array, $minute);
+
+		$command = $publication->getCommand();
+		exec($command, $output, $return);
+		if($return != 0){
+			throw new Exception('Error: '.implode(PHP_EOL, $output));
+		}
+
 		$this->addJob($publication)->write();
 	}
 }

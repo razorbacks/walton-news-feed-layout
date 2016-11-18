@@ -23,7 +23,10 @@ class Publication extends Job {
 	}
 
 	public function getCommand(){
-		return str_replace('\\%', '%', parent::getCommand());
+		// double escape for in-memory assignment
+		$cmd = str_replace('\\\\%', '%', parent::getCommand());
+		// single escape for parsing crontab from file
+		return str_replace('\\%', '%', $cmd);
 	}
 
 	public function getNextRuntime(){
