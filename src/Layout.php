@@ -10,6 +10,7 @@ class Layout {
 	protected $categories;
 	protected $number_of_posts_to_show;
 	protected $default_thumbnail = "https://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
+	protected $default_image = "https://wordpress.uark.edu/business/files/2015/01/default-480x266.jpg";
 	protected $html;
 
 	public function __construct($feed, $categories, $count, $view){
@@ -94,6 +95,12 @@ class Layout {
 				$item['thumbnail'] = str_replace("\\","",$item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"]);
 			} else {
 				$item['thumbnail'] = $this->default_thumbnail;
+			}
+
+			if(!empty($item["featured_image"]["guid"])){
+				$item['image'] = str_replace("\\","",$item["featured_image"]["guid"]);
+			} else {
+				$item['image'] = $this->default_image;
 			}
 
 			if ($featured){

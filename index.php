@@ -53,6 +53,7 @@
 			<label for="view" class="control-label col-sm-2">Layout:</label>
 			<div class="col-sm-10">
 				<select name="view" required class="form-control">
+					<option value="tile">Tile</option>
 					<option value="list">List</option>
 				</select>
 			</div>
