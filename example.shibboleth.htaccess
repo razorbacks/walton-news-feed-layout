@@ -1,0 +1,2 @@
+ShibRequestSetting requireSession 1
+Require entitlement "urn:mace:uark.edu:ADGroups:Exchange Resource Units:WCOB (Walton College):WCOB: Webmasters"
