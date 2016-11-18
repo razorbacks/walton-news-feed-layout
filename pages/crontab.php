@@ -23,8 +23,8 @@ foreach($scheduler->getPublications() as $publication){
 	$time = $publication->getNextRuntime();
 	echo "<td>$time</td>";
 
-	$command = implode(',', $publication->categories);
-	echo "<td>$command</td>";
+	$categories = implode(',', $publication->categories);
+	echo "<td>$categories</td>";
 
 	echo "</tr>\n";
 }
