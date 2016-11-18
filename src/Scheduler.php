@@ -62,7 +62,9 @@ class Scheduler extends Crontab {
 		$minute = $this->getAnOpenMinute();
 		$publication = new Publication($array, $minute);
 
-		$command = $publication->getCommand();
+		// un-escape in-memory command %
+		// https://github.com/yzalis/Crontab/issues/34
+		$command = str_replace('\\%', '%', $publication->getCommand());
 		exec($command, $output, $return);
 		if($return != 0){
 			throw new Exception('Error: '.implode(PHP_EOL, $output));
