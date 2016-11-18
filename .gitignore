@@ -1,5 +1,4 @@
-feed.html
-
 /vendor/
-coverage/
+/coverage/
 /publications/
+/.htaccess

@@ -28,7 +28,11 @@ More secure example for web server running as `www-data`
 
 The application interface is `index.php` and is straight-forward.
 
+It is recommended to secure the application with authentication.
+An example `.htaccess` file is included for [Shibboleth][5].
+
 [1]:https://getcomposer.org/
 [2]:https://en.wikipedia.org/wiki/Cron
 [3]:https://travis-ci.org/razorbacks/walton-news-publication-scheduler
 [4]:https://travis-ci.org/razorbacks/walton-news-publication-scheduler.svg?branch=master
+[5]:https://shibboleth.net/
