@@ -402,7 +402,7 @@
             </div>
          </div>
 
-         <div id="php_include_div"><?php include("../bin/feed.html") ?></div>
+         <div id="php_include_div"><?php require __DIR__.'/../getlayout.php'; ?></div>
                 
       </div>
       <section class="gray" id="section-footer" style="padding: 10px 0px 20px 0px;">

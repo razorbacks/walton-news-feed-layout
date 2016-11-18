@@ -4,7 +4,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="UTF-8">
-      <title>Home Page | 
+      <title>Full Width Interior Page | 
                                                                  Walton College |
                                                         University of Arkansas
                 
@@ -26,13 +26,21 @@
             OUC.props = OUC.props || {};
             
             
-                OUC.globalProps['path'] = "/test/ou-frame-templates/home-page.php";
+                OUC.globalProps['path'] = "/test/ou-frame-templates/full-width-interior-page.php";
                 OUC.globalProps['domain'] = "www.uark.edu";
                 OUC.globalProps['index-file'] = "index";
                 OUC.globalProps['extension'] = "php";
                 OUC.globalProps['production_root'] = "";
-                OUC.pageProps['heading'] = "Home Page";
-                OUC.pageProps['breadcrumb'] = "Home Page";
+                OUC.pageProps['pagetype'] = "interior";
+                OUC.pageProps['banner-region'] = "on";
+                OUC.pageProps['banner-type'] = "image";
+                OUC.pageProps['banner-location'] = "global";
+                OUC.pageProps['banner-image-type'] = "short";
+                OUC.pageProps['heading-display'] = "on";
+                OUC.pageProps['heading'] = "Full Width Interior Page";
+                OUC.pageProps['breadcrumb'] = "Full Width Interior Page";
+                OUC.pageProps['layout'] = "full-width";
+                OUC.pageProps['intro-text'] = "on";
             
             var key;
             for (key in OUC.globalProps) {
@@ -379,11 +387,38 @@
 <!-- end of navbar-header div --> <!-- end of mega menu include -->
          </div>
       </nav>
+      <div id="main-container" class="container">
+         <section class="landingPage hidden-xs visible-sm visible-md visible-lg">
+            <div class="container"><img alt="Full Width Interior Page" class="img-responsive" src="http://walton.uark.edu/images/short-banner.jpg" style="width: 100%" title="Full Width Interior Page"><div class="img-responsive" id="site-title-container">
+                  <h1 class="site-title" id="site-title-h1id"><a href="/">Sam M. Walton College of Business</a></h1>
+               </div>
+            </div>
+         </section>
+         <div class="row" id="content">
+            <div class="col-md-12">
+               <h2 class="intro-headline">Full Width Interior Page</h2>
+               <ul class="breadcrumb">
+                  <li><a href="http://www.uark.edu/" class="uark-home">
+                                                                U of A
+                                                        </a></li>
+                  <li><a href="/">Walton College</a></li>
+                  <li><a href="/test/"></a></li>
+                  <li><a href="/test/ou-frame-templates/">Page Title</a></li>
+                  <li>Full Width Interior Page</li>
+               </ul>
+               <div class="row">
+                  <div class="col-md-12">
+                     <p class="lead">Intro Text</p>
+                  </div>
+               </div>
+                        
+                        
+                        
+               <div id="php_include_div"><?php require __DIR__.'/../getlayout.php'; ?></div>
                 
-                <img class="img-responsive" src="http://waltoncollege.uark.edu/temp/walton-web/images/cat.jpg">
-                
-      <div id="php_include_div"><?php include("../bin/feed.html") ?></div>
-        
+            </div>
+         </div>
+      </div>
       <section class="gray" id="section-footer" style="padding: 10px 0px 20px 0px;">
          <div class="container">
             <div class="row" style="padding-top: 30px;">
@@ -514,7 +549,7 @@
 </div>
 </footer>
 <script>
-                        var current_path = "/test/ou-frame-templates/home-page.php";
+                        var current_path = "/test/ou-frame-templates/full-width-interior-page.php";
                 </script><!-- javascripts that don't need to go in the head can go here -->
 
 
@@ -598,7 +633,7 @@ document.getElementById("directedit-footer").innerHTML = anchor;
 }
 window.onload = function(){ directedit(); }
 //--></script>
-      <!--2016-04-05T15:48:00Z--><div id="hidden">
-         <a rel="nofollow" id="oudirectedit" href="http://a.omniupdate.uark.edu/10?skin=oucampus&amp;account=walton&amp;site=walton&amp;action=de&amp;path=/test/ou-frame-templates/home-page.pcf" ><span class="hidden">Edit webpage</span></a>
+      <!--2016-04-05T15:49:00Z--><div id="hidden">
+         <a rel="nofollow" id="oudirectedit" href="http://a.omniupdate.uark.edu/10?skin=oucampus&amp;account=walton&amp;site=walton&amp;action=de&amp;path=/test/ou-frame-templates/full-width-interior-page.pcf" ><span class="hidden">Edit webpage</span></a>
       </div><span id="directedit-footer"></span></body>
 </html>
