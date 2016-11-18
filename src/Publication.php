@@ -32,7 +32,7 @@ class Publication extends Job {
 			return false;
 		}
 
-		$date = new DateTime(date('h:i:s'));
+		$date = new DateTime(date('H:i:s'));
 		$dminute = (int)$date->format('i');
 		$jminute = (int)$this->getMinute();
 
@@ -41,7 +41,7 @@ class Publication extends Job {
 			$date->modify("+1 hour");
 		}
 
-		$date->setTime((int)$date->format('h'), $jminute);
+		$date->setTime((int)$date->format('H'), $jminute);
 		return $date->format('h:i A');
 	}
 
