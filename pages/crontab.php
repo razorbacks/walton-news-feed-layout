@@ -48,7 +48,7 @@ foreach($scheduler->getPublications() as $publication){
 	$hash = $publication->getHash();
 	?><td><form method="POST">
 		<input type="hidden"  name="run" value="<?php echo $hash; ?>"/>
-		<button class="btn btn-info">Publish Now</button>
+		<button class="btn btn-warning">Publish Now</button>
 	</form></td><?php
 
 	$last = $publication->getLastRuntime();

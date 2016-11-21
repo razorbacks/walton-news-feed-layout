@@ -63,13 +63,13 @@
 			<h3>Preview</h3>
 			<div class="row">
 				<div class="col-sm-4">
-					<p><button type="submit" formmethod="GET" formaction="pages/previews/college-interior.php" class="btn btn-default btn-preview">College Interior</button></p>
+					<p><button type="submit" formmethod="GET" formaction="pages/previews/two-column-interior-page.php" class="btn btn-info btn-preview">Two-Column Interior</button></p>
 				</div>
 				<div class="col-sm-4">
-					<p><button type="submit" formmethod="GET" formaction="pages/previews/full-width-interior-page.php" class="btn btn-default btn-preview">Full-Width Interior</button></p>
+					<p><button type="submit" formmethod="GET" formaction="pages/previews/full-width-interior-page.php" class="btn btn-info btn-preview">Full-Width Interior</button></p>
 				</div>
 				<div class="col-sm-4">
-					<p><button type="submit" formmethod="GET" formaction="pages/previews/two-column-interior-page.php" class="btn btn-default btn-preview">Two-Column Interior</button></p>
+					<p><button type="submit" formmethod="GET" formaction="pages/previews/college-interior.php" class="btn btn-info btn-preview">College Interior</button></p>
 				</div>
 			</div>
 		</div>
