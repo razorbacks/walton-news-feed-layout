@@ -7,10 +7,10 @@
 
 			<div class='media'>
 				<a class='pull-left' href='{{ item.link }}'>
-					<img src='{{ item.thumbnail }}' alt='{{ item.title }} featured image'/>
+					<img src='{{ item.thumbnail }}' alt='{{ item.title | raw }} featured image'/>
 				</a>
 				<div class='media-body'>
-					<h4 class='media-heading'><a href='{{ item.link }}'>{{ item.title }}</a></h4>
+					<h4 class='media-heading'><a href='{{ item.link }}'>{{ item.title | raw }}</a></h4>
 					{{ item.excerpt | raw }}
 				</div>
 			</div>

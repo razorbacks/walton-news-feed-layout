@@ -12,11 +12,11 @@
 					<div class="thumbnail">
 
 						<a href="{{ item.link }}">
-							<img src="{{ item.image }}" alt="{{ item.title }}">
+							<img src="{{ item.image }}" alt="{{ item.title | raw }}">
 						</a>
 
 						<div class="caption">
-							<h3><a href="{{ item.link }}">{{ item.title }}</a></h3>
+							<h3><a href="{{ item.link }}">{{ item.title | raw }}</a></h3>
 
 							{{ item.excerpt | raw }}
 
