@@ -6,7 +6,7 @@
 			<th>Next Runtime</th>
 			<th>Run Now</th>
 			<th>Last Runtime</th>
-			<th>Categories</th>
+			<th>Filename</th>
 			<th>Delete</th>
 		</tr>
 	</thead>
@@ -54,8 +54,8 @@ foreach($scheduler->getPublications() as $publication){
 	$last = $publication->getLastRuntime();
 	echo "<td>$last</td>";
 
-	$categories = implode(',', $publication->categories);
-	echo "<td>$categories</td>";
+	$filename = basename($publication->getPublicationFilename());
+	echo "<td>$filename</td>";
 
 	$hash = $publication->getHash();
 	?><td><form method="POST">

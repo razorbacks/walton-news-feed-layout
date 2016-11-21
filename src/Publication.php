@@ -162,7 +162,12 @@ class Publication extends Job {
 	}
 
 	public function getIncludeScript(){
-		return "<?php include '".$this->getPublicationFilename()."'; ?>";
+		return
+			"<?php include '".
+			$this->getPublicationFilename().
+			"'; /* ".
+			$this->getComments().
+			" */ ?>";
 	}
 
 	protected function buildQueryString(){
