@@ -187,8 +187,9 @@ class Publication extends Job {
 			->setCommand(
 				'/usr/bin/php ' .
 				realpath(__DIR__.'/../pages/getlayout.php') .
-				' \'' . $this->buildQueryString() .
-				'\' > ' . $this->getPublicationFilename()
+				" '" . $this->buildQueryString() . "'" .
+				" '" . $this->getPublicationFilename() . "'" .
+				" > /dev/null 2>&1"
 			)
 			->setComments($array['comments'])
 		;
