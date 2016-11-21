@@ -163,11 +163,11 @@ class Publication extends Job {
 
 	public function getIncludeScript(){
 		return
-			"<?php include '".
-			$this->getPublicationFilename().
-			"'; /* ".
+			"<?php /* News Publication: ".
 			$this->getComments().
-			" */ ?>";
+			" */ include '".
+			$this->getPublicationFilename().
+			"'; ?>";
 	}
 
 	protected function buildQueryString(){
