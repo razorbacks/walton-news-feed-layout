@@ -10,7 +10,17 @@ if(!isset($_GET['categories'],$_GET['count'],$_GET['view'])){
 	echo "categories, count, and view required.";
 } else {
 	require_once __DIR__.'/../vendor/autoload.php';
-	$feed = file_get_contents("https://wordpress.uark.edu/business/wp-json/posts");
+
+	$endpoint = "https://wordpress.uark.edu/business/wp-json/posts";
+	$filter = array(
+		'filter' => array(
+			'cat' => implode(',', $_GET['categories']),
+			'posts_per_page' => $_GET['count'],
+		)
+	);
+	$filter = http_build_query($filter);
+	$feed = file_get_contents("$endpoint?$filter");
+
 	$layout = new Layout($feed, $_GET['categories'],$_GET['count'],$_GET['view']);
 
 	if(isset($argv[2])){
