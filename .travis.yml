@@ -7,6 +7,7 @@ php:
 install:
   - composer config -g -- disable-tls true
   - composer install --no-dev
+  - cp example.env .env
 script:
   - ./tests/lint.bash
   - phpunit --coverage-clover=coverage.xml

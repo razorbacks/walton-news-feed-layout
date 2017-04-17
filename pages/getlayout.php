@@ -11,7 +11,14 @@ if(!isset($_GET['categories'],$_GET['count'],$_GET['view'])){
 } else {
 	require_once __DIR__.'/../vendor/autoload.php';
 
-	$endpoint = "https://wordpress.uark.edu/business/wp-json/posts";
+	$dotenv = new Dotenv\Dotenv(dirname(__DIR__));
+	$dotenv->load();
+
+	$endpoint = getenv('NEWS_PUBLICATION_ENDPOINT');
+	if ( empty($endpoint) ) {
+		throw new Exception("NEWS_PUBLICATION_ENDPOINT cannot be empty.");
+	}
+
 	$filter = array(
 		'filter' => array(
 			'cat' => implode(',', $_GET['categories']),

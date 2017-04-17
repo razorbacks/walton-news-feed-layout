@@ -9,11 +9,14 @@ class Layout {
 	protected $news;
 	protected $categories;
 	protected $number_of_posts_to_show;
-	protected $default_thumbnail = "https://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg";
-	protected $default_image = "https://wordpress.uark.edu/business/files/2015/01/default-480x266.jpg";
+	protected $default_thumbnail;
+	protected $default_image;
 	protected $html;
 
 	public function __construct($feed, $categories, $count, $view){
+		$this->default_thumbnail = getenv('NEWS_PUBLICATION_DEFAULT_THUMBNAIL');
+		$this->default_image = getenv('NEWS_PUBLICATION_DEFAULT_IMAGE');
+
 		$views = __DIR__."/../views";
 		if(!file_exists("$views/$view.twig.html")){
 			throw new InvalidArgumentException(

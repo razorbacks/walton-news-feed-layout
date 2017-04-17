@@ -2,3 +2,4 @@
 /coverage/
 /publications/
 /.htaccess
+.env

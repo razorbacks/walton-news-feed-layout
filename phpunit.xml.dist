@@ -24,4 +24,7 @@
 		<log type="coverage-text" target="php://stdout"
 			showUncoveredFiles="false"/>
 	</logging>
+	<php>
+		<env name="NEWS_PUBLICATION_DEFAULT_THUMBNAIL" value="https://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg"/>
+	</php>
 </phpunit>
