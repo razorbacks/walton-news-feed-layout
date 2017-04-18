@@ -2,6 +2,7 @@
 namespace razorbacks\walton\news;
 
 use InvalidArgumentException;
+use Exception;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
@@ -9,14 +10,9 @@ class Layout {
 	protected $news;
 	protected $categories;
 	protected $number_of_posts_to_show;
-	protected $default_thumbnail;
-	protected $default_image;
 	protected $html;
 
 	public function __construct($feed, $categories, $count, $view){
-		$this->default_thumbnail = getenv('NEWS_PUBLICATION_DEFAULT_THUMBNAIL');
-		$this->default_image = getenv('NEWS_PUBLICATION_DEFAULT_IMAGE');
-
 		$views = __DIR__."/../views";
 		if(!file_exists("$views/$view.twig.html")){
 			throw new InvalidArgumentException(
@@ -32,9 +28,9 @@ class Layout {
 				". see http://php.net/manual/en/function.json-last-error.php"
 			);
 		}
-		if(empty($this->news[0]["link"])){
+		if ( empty($this->news) ) {
 			throw new InvalidArgumentException(
-				"Feed is empty"
+				"Feed is empty."
 			);
 		}
 
@@ -62,7 +58,10 @@ class Layout {
 			);
 		}
 
-		$twig = new Twig_Environment(new Twig_Loader_Filesystem($views));
+		$twig = new Twig_Environment(
+			new Twig_Loader_Filesystem($views),
+			array('autoescape' => false)
+		);
 		$this->build($twig->loadTemplate("$view.twig.html"));
 	}
 
@@ -75,37 +74,26 @@ class Layout {
 				break;
 			}
 
+			// canonicalize rendered item attributes
+			$item['title'] = $item['title']['rendered'];
+			$item['excerpt'] = $item['excerpt']['rendered'];
+
+			// images
+			if (!empty($item['_links']['wp:featuredmedia'][0]['href'])) {
+				$url = $item['_links']['wp:featuredmedia'][0]['href'];
+				$item['image'] = $this->fetchImageUrls($url);
+			} else {
+				$item['image'] = array();
+			}
+			$item['image'] = $this->getDefaultImages($item['image']);
+
+			// show featured items first
 			$featured = false;
-			$news_item = false;
-			foreach ($item["terms"]["category"] as $category){
+			foreach ($item["categories"] as $category){
 				if ($category["ID"] == 22) {
 					$featured = true;
 				}
-				foreach ($this->categories as $catid){
-					if ($category["ID"] == $catid) {
-						$news_item = true; break;
-					}
-				}
-				if($news_item){
-					break;
-				}
 			}
-			if (!$news_item){
-				continue;
-			}
-
-			if(!empty($item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"])){
-				$item['thumbnail'] = str_replace("\\","",$item["featured_image"]["attachment_meta"]["sizes"]["thumbnail"]["url"]);
-			} else {
-				$item['thumbnail'] = $this->default_thumbnail;
-			}
-
-			if(!empty($item["featured_image"]["guid"])){
-				$item['image'] = str_replace("\\","",$item["featured_image"]["guid"]);
-			} else {
-				$item['image'] = $this->default_image;
-			}
-
 			if ($featured){
 				$featured_items []= $item;
 			} else {
@@ -113,9 +101,64 @@ class Layout {
 			}
 		}
 
-		$output = array_merge($featured_items, $regular_items);
+		$items = array_merge($featured_items, $regular_items);
+		$this->html = $template->render(array('items' => $items));
+	}
 
-		$this->html = $template->render(array('output' => $output));
+	/**
+	 * fetch the URLs for a post's featured image and thumbnail
+	 *
+	 * @param  string $url wp-json post media endpoint
+	 * @return array  contains image URLs
+	 */
+	protected function fetchImageUrls($url)
+	{
+		$json = file_get_contents($url);
+		if ( empty($json) ) {
+			throw new Exception("Nothing returned from URL: $url");
+		}
+
+		$media = json_decode($json, $array = true);
+		if ( !is_array($media) ) {
+			throw new Exception(
+				"JSON Error #".json_last_error().
+				". see http://php.net/manual/en/function.json-last-error.php"
+			);
+		}
+
+		$array = array();
+
+		foreach ( $media['media_details']['sizes'] as $size => $image ) {
+			$array[$size] = $image['source_url'];
+		}
+
+		return $array;
+	}
+
+	/**
+	 * fills any missing image sizes with defaults
+	 *
+	 * @param  array $images
+	 * @return array
+	 */
+	public function getDefaultImages($images)
+	{
+		$sizes = array(
+			'thumbnail',
+			'medium',
+			'medium_large',
+			'large',
+			'full',
+		);
+
+		foreach ( $sizes as $size ) {
+			if ( empty($images[$size]) ) {
+				$env = strtoupper("NEWS_PUBLICATION_DEFAULT_IMAGE_$size");
+				$images[$size] = getenv($env);
+			}
+		}
+
+		return $images;
 	}
 
 	public function render(){

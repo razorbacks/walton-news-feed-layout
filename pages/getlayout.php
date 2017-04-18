@@ -19,14 +19,12 @@ if(!isset($_GET['categories'],$_GET['count'],$_GET['view'])){
 		throw new Exception("NEWS_PUBLICATION_ENDPOINT cannot be empty.");
 	}
 
-	$filter = array(
-		'filter' => array(
-			'cat' => implode(',', $_GET['categories']),
-			'posts_per_page' => $_GET['count'],
-		)
+	$query = array(
+		'categories' => $_GET['categories'],
+		'per_page' => $_GET['count'],
 	);
-	$filter = http_build_query($filter);
-	$feed = file_get_contents("$endpoint?$filter");
+	$query = http_build_query($query);
+	$feed = file_get_contents("$endpoint?$query");
 
 	$layout = new Layout($feed, $_GET['categories'],$_GET['count'],$_GET['view']);
 
