@@ -84,7 +84,6 @@ foreach($scheduler->getPublications() as $publication){
 </style>
 
 <script>
-$("#cronjobs").DataTable();
 $( "#dialog" ).dialog({
 	autoOpen: false,
 	width: 850,
@@ -101,4 +100,5 @@ $(".btn-incode").click(function(){
 	$("#incode").text($(this).data("incode"));
 	$("#dialog").dialog("open");
 });
+$("#cronjobs").DataTable();
 </script>
