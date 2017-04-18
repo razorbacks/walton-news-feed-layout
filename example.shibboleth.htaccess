@@ -1,2 +1,2 @@
 ShibRequestSetting requireSession 1
-Require entitlement "urn:mace:uark.edu:ADGroups:Exchange Resource Units:WCOB (Walton College):WCOB: Webmasters"
+Require entitlement "urn:mace:uark.edu:ADGroups:Walton College:Security Groups:WCOB-WebAdministrators"
