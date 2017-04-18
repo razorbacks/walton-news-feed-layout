@@ -2,20 +2,11 @@
 use razorbacks\walton\news\Layout;
 
 class LayoutTest extends PHPUnit_Framework_TestCase {
-	public function outputViewDataProvider(){
-		return array(
-			'list' => array(array(40, 22), 4, 'list'),
-		);
-	}
+	public function testCanCreateListLayoutWithDefaultImages(){
+		$json     = file_get_contents(__DIR__."/json/posts-no-image.json");
+		$expected = file_get_contents(__DIR__."/html/list-no-image.html");
 
-	/**
-	 * @dataProvider outputViewDataProvider
-	 */
-	public function testCanGenerateOutput($categories, $count, $view){
-		$json     = file_get_contents(__DIR__."/json/posts.json");
-		$expected = file_get_contents(__DIR__."/html/$view.html");
-
-		$layout = new Layout($json, $categories, $count, $view);
+		$layout = new Layout($json, array(40, 22), 4, 'list');
 		$actual = $layout->render();
 
 		$this->assertSame((string)$layout, $actual);
