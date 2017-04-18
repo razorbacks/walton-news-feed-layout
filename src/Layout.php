@@ -90,7 +90,7 @@ class Layout {
 			// show featured items first
 			$featured = false;
 			foreach ($item["categories"] as $category){
-				if ($category["ID"] == 22) {
+				if ($category == 22) {
 					$featured = true;
 				}
 			}
