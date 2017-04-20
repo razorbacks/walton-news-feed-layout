@@ -17,4 +17,19 @@ class PublicationTest extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('\razorbacks\walton\news\Publication', $publication);
     }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testCanRejectNonExistentView()
+    {
+        $parameters = array(
+            'categories' => array(1),
+            'count' => 1,
+            'view' => 'some non-existent view',
+            'comments' => 'something',
+        );
+
+        $publication = new Publication($parameters, 1);
+    }
 }
