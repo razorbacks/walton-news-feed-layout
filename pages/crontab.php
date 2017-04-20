@@ -65,7 +65,6 @@ foreach($scheduler->getPublications() as $publication){
 
 	echo "</tr>\n";
 }
-
 ?>
 
 	</tbody>

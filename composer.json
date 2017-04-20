@@ -12,7 +12,8 @@
         "symfony/process": "v2.6.13",
         "yzalis/crontab": "1.0.4",
         "vlucas/phpdotenv": "v2.0.1",
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "jpuck/error-exception-handler": "*"
     },
     "autoload": {
         "psr-4": {

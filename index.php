@@ -1,3 +1,11 @@
+<?php
+require_once __DIR__.'/vendor/autoload.php';
+
+use jpuck\Error\Handler;
+
+Handler::convertErrorsToExceptions();
+Handler::swift();
+?>
 <!doctype html>
 <html>
 <head>
