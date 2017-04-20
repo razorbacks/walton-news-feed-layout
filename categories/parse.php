@@ -4,7 +4,7 @@
 <select id="select-categories" name="categories[]" multiple="multiple">
 <?php
 $dom = new DOMDocument;
-$dom->loadHTMLFile(__DIR__.'/cats.html');
+$dom->loadHTMLFile(__DIR__.'/scraped.html');
 
 foreach($dom->getElementsByTagName('li') as $item){
 	// id is in the class
