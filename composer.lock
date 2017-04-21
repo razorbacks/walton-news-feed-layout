@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "jpuck/error-exception-handler",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jpuck/error-exception-handler.git",
-                "reference": "e336e1bed300559e4d2599dfdf8f1ae6001ba398"
+                "reference": "5d30a00bedb772b177f5bf59da172e90c94a6ddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jpuck/error-exception-handler/zipball/e336e1bed300559e4d2599dfdf8f1ae6001ba398",
-                "reference": "e336e1bed300559e4d2599dfdf8f1ae6001ba398",
+                "url": "https://api.github.com/repos/jpuck/error-exception-handler/zipball/5d30a00bedb772b177f5bf59da172e90c94a6ddc",
+                "reference": "5d30a00bedb772b177f5bf59da172e90c94a6ddc",
                 "shasum": ""
             },
             "require": {
@@ -41,7 +41,7 @@
                 }
             ],
             "description": "Convert errors to exceptions and handle them.",
-            "time": "2017-04-20T19:49:58+00:00"
+            "time": "2017-04-21T21:32:58+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
