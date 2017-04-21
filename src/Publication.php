@@ -30,6 +30,12 @@ class Publication extends Job
 
     public function getCommand()
     {
+        // unescape from crontab
+        return str_replace('\\%', '%', parent::getCommand());
+    }
+
+    public function getRealCommand()
+    {
         // unescape from in-memory
         $return = str_replace('\\\\%', '%', parent::getCommand());
         // unescape from crontab
@@ -70,7 +76,7 @@ class Publication extends Job
 
     public function parseCommand()
     {
-        $pieces = explode(' ', $this->getCommand());
+        $pieces = explode(' ', $this->getRealCommand());
 
         if(!isset($pieces[2])){
             return $this->valid = false;
