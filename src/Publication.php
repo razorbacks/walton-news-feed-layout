@@ -20,11 +20,16 @@ class Publication extends Job {
 		// escape % for crontab
 		// https://github.com/yzalis/Crontab/issues/34
 		// http://www.ducea.com/2008/11/12/using-the-character-in-crontab-entries/
-		return parent::setCommand(str_replace('%', '\\\\%', $command));
+		$return = parent::setCommand(str_replace('%', '\\\\%', $command));
+		$this->parseCommand();
+		return $return;
 	}
 
 	public function getCommand(){
-		return str_replace('\\%', '%', parent::getCommand());
+		// unescape from in-memory
+		$return = str_replace('\\\\%', '%', parent::getCommand());
+		// unescape from crontab
+		return str_replace('\\%', '%', $return);
 	}
 
 	public function getNextRuntime(){
@@ -57,27 +62,32 @@ class Publication extends Job {
 		return $datetime->format('Y-m-d H:i - h:i A l, F d, Y');
 	}
 
-	public function importQueryString(){
-		$command = $this->getCommand();
+	public function parseCommand(){
+		$pieces = explode(' ', $this->getCommand());
 
-		$pieces = explode(' ', $command);
-		if(isset($pieces[2])){
-			$query = trim($pieces[2],"'");
-			parse_str($query, $array);
-
-			// get categories, count, and view
-			foreach(array('categories', 'count', 'view') as $property){
-				if(!isset($array[$property])){
-					$this->valid = false;
-					break;
-				}
-				// use custom setters with variable variables from parse_str
-				$set = "set$property";
-				$this->$set($array[$property]);
-			}
-		} else {
-			$this->valid = false;
+		if(!isset($pieces[2])){
+			return $this->valid = false;
 		}
+
+		if( !$this->parseQueryString(trim($pieces[2],"'")) ){
+			return $this->valid = false;
+		}
+	}
+
+	protected function parseQueryString($query){
+		parse_str($query, $array);
+
+		// get categories, count, and view
+		foreach(array('categories', 'count', 'view') as $property){
+			if(!isset($array[$property])){
+				return false;
+			}
+			// use custom setters with variable variables from parse_str
+			$set = "set$property";
+			$this->$set($array[$property]);
+		}
+
+		return true;
 	}
 
 	public function __get($property){
@@ -91,7 +101,7 @@ class Publication extends Job {
 			throw new InvalidArgumentException("Only $properties are accessible");
 		}
 		if(empty($this->$property)){
-			$this->importQueryString();
+			$this->parseCommand();
 		}
 		if(empty($this->$property)){
 			return false;

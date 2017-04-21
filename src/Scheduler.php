@@ -28,7 +28,7 @@ class Scheduler extends Crontab {
 			)
 		);
 
-		$publication->importQueryString();
+		$publication->parseCommand();
 
 		return $publication;
 	}
