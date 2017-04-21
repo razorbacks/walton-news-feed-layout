@@ -91,4 +91,24 @@ class PublicationTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($publication->valid);
     }
+
+    public function test_filters_publications_from_other_syndicates()
+    {
+        $parameters = array(
+            'categories' => array(1),
+            'count' => 1,
+            'view' => 'list',
+            'comments' => 'something',
+        );
+        $publication = new Publication($parameters, 1);
+
+        $this->assertInstanceOf('\razorbacks\walton\news\Publication', $publication);
+        $this->assertTrue($publication->valid);
+
+        $command = explode(' ', $publication->getCommand());
+        $command[3] = __DIR__.'/'.basename($command[3]);
+        $publication->setCommand(implode(' ', $command));
+
+        $this->assertFalse($publication->valid);
+    }
 }
