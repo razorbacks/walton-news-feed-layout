@@ -4,7 +4,7 @@ use razorbacks\walton\news\Publication;
 
 class PublicationTest extends PHPUnit_Framework_TestCase
 {
-    public function testCanCreatePublication()
+    public function test_creates_publication()
     {
         $parameters = array(
             'categories' => array(1),
@@ -21,7 +21,7 @@ class PublicationTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testCanRejectNonExistentView()
+    public function test_rejects_invalid_view()
     {
         $parameters = array(
             'categories' => array(1),
@@ -33,7 +33,7 @@ class PublicationTest extends PHPUnit_Framework_TestCase
         $publication = new Publication($parameters, 1);
     }
 
-    public function testCanGetAndSetCommand()
+    public function test_gets_and_sets_command()
     {
         $parameters = array(
             'categories' => array(1),
@@ -52,7 +52,7 @@ class PublicationTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($publication->valid);
     }
 
-    public function testCanInvalidateMissingQueryString()
+    public function test_invalidates_missing_query_string()
     {
         $parameters = array(
             'categories' => array(1),
@@ -72,7 +72,7 @@ class PublicationTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($publication->valid);
     }
 
-    public function testCanInvalidateMissingCategoriesInQueryString()
+    public function test_invalidates_missing_categories_in_query_string()
     {
         $parameters = array(
             'categories' => array(1),

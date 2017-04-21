@@ -2,7 +2,7 @@
 use razorbacks\walton\news\Layout;
 
 class LayoutTest extends PHPUnit_Framework_TestCase {
-	public function testCanCreateListLayoutWithDefaultImages(){
+	public function test_creates_list_layout_with_default_images(){
 		$json     = file_get_contents(__DIR__."/json/posts-no-image.json");
 		$expected = file_get_contents(__DIR__."/html/list-no-image.html");
 
@@ -14,10 +14,9 @@ class LayoutTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @testdox Can invalidate JSON
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testCanInvalidateJSON(){
+	public function test_invalidates_json(){
 		$invalid = file_get_contents(__DIR__.'/json/invalid.json');
 		$generator = new Layout($invalid, 1, 1, 'list');
 		$this->assertTrue(false);
