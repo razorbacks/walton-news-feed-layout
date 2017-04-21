@@ -23,23 +23,14 @@ class Publication extends Job
         // escape % for crontab
         // https://github.com/yzalis/Crontab/issues/34
         // http://www.ducea.com/2008/11/12/using-the-character-in-crontab-entries/
-        $return = parent::setCommand(str_replace('%', '\\\\%', $command));
+        $return = parent::setCommand(str_replace('%', '\\%', $command));
         $this->parseCommand();
         return $return;
     }
 
-    public function getCommand()
+    public function getCommandUnescaped()
     {
-        // unescape from crontab
-        return str_replace('\\%', '%', parent::getCommand());
-    }
-
-    public function getRealCommand()
-    {
-        // unescape from in-memory
-        $return = str_replace('\\\\%', '%', parent::getCommand());
-        // unescape from crontab
-        return str_replace('\\%', '%', $return);
+        return str_replace('\\%', '%', $this->getCommand());
     }
 
     public function getNextRuntime()
@@ -76,7 +67,7 @@ class Publication extends Job
 
     public function parseCommand()
     {
-        $pieces = explode(' ', $this->getRealCommand());
+        $pieces = explode(' ', $this->getCommandUnescaped());
 
         if(!isset($pieces[2])){
             return $this->valid = false;

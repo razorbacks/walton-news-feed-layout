@@ -46,7 +46,7 @@ class PublicationTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\razorbacks\walton\news\Publication', $publication);
         $this->assertTrue($publication->valid);
 
-        $command = explode(' ', $publication->getCommand());
+        $command = explode(' ', $publication->getCommandUnescaped());
         $publication->setCommand(implode(' ', $command));
 
         $this->assertTrue($publication->valid);
@@ -65,7 +65,7 @@ class PublicationTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\razorbacks\walton\news\Publication', $publication);
         $this->assertTrue($publication->valid);
 
-        $command = explode(' ', $publication->getCommand());
+        $command = explode(' ', $publication->getCommandUnescaped());
         unset($command[2]);
         $publication->setCommand(implode(' ', $command));
 
@@ -85,7 +85,7 @@ class PublicationTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\razorbacks\walton\news\Publication', $publication);
         $this->assertTrue($publication->valid);
 
-        $command = explode(' ', $publication->getCommand());
+        $command = explode(' ', $publication->getCommandUnescaped());
         $command[2] = str_replace('categories', '', $command[2]);
         $publication->setCommand(implode(' ', $command));
 
@@ -105,7 +105,7 @@ class PublicationTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\razorbacks\walton\news\Publication', $publication);
         $this->assertTrue($publication->valid);
 
-        $command = explode(' ', $publication->getCommand());
+        $command = explode(' ', $publication->getCommandUnescaped());
         $command[3] = __DIR__.'/'.basename($command[3]);
         $publication->setCommand(implode(' ', $command));
 
