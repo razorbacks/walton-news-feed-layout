@@ -79,6 +79,14 @@ class Publication extends Job
         if( !$this->parseQueryString(trim($pieces[2],"'")) ){
             return $this->valid = false;
         }
+
+        if(!isset($pieces[3])){
+            return $this->valid = false;
+        }
+
+        if( !$this->parsePublicationFilename(trim($pieces[3],"'")) ){
+            return $this->valid = false;
+        }
     }
 
     protected function parseQueryString($query)
@@ -96,6 +104,11 @@ class Publication extends Job
         }
 
         return true;
+    }
+
+    protected function parsePublicationFilename($filename)
+    {
+        return $filename === $this->getPublicationFilename();
     }
 
     public function __get($property)
