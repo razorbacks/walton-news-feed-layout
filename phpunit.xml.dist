@@ -10,7 +10,7 @@
 		stopOnFailure="false">
 	<testsuites>
 		<testsuite name="Walton News Test Suite">
-			<directory>tests</directory>
+			<directory>./tests/unit</directory>
 		</testsuite>
 	</testsuites>
 	<filter>
