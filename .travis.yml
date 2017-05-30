@@ -1,15 +1,19 @@
 language: php
-php:
-  - 7.0.8
-  - 5.6
-  - 5.5.9
-  - 5.3.3
+matrix:
+  include:
+  - php: "nightly"
+    env: LEGACY=false
+  - php: "7.0"
+    env: LEGACY=false
+  - php: "5.3.3"
+    env: LEGACY=true
 install:
-  - composer config -g -- disable-tls true
-  - composer install --no-dev
   - cp example.env .env
+  - if $LEGACY; then source ./tests/travis/install.legacy.bash;
+    else source ./tests/travis/install.bash; fi
 script:
   - ./tests/lint.bash
-  - phpunit --coverage-clover=coverage.xml
+  - if $LEGACY; then source ./tests/travis/script.legacy.bash;
+    else source ./tests/travis/script.bash; fi
 after_success:
   - bash <(curl -s https://codecov.io/bash)
