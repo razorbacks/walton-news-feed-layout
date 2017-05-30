@@ -7,6 +7,9 @@ matrix:
     env: LEGACY=false
   - php: "5.3.3"
     env: LEGACY=true
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y cron
 install:
   - cp example.env .env
   - if $LEGACY; then source ./tests/travis/install.legacy.bash;

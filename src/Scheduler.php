@@ -90,18 +90,31 @@ class Scheduler extends Crontab {
 		return $available[array_rand($available)];
 	}
 
-	public function createPublication($array){
+	public function createPublication($array, $execute = true){
 		$minute = $this->getAnOpenMinute();
 		$publication = new Publication($array, $minute);
 
 		// un-escape in-memory command %
 		// https://github.com/yzalis/Crontab/issues/34
 		$command = str_replace('\\%', '%', $publication->getCommand());
-		exec($command, $output, $return);
-		if($return != 0){
-			throw new Exception('Error: '.implode(PHP_EOL, $output));
+		if ($execute) {
+			exec($command, $output, $return);
+			if($return != 0){
+				throw new Exception('Error: '.implode(PHP_EOL, $output));
+			}
 		}
 
 		$this->addJob($publication)->write();
+	}
+
+	public function backup()
+	{
+		$temp = new Crontab($parseExistingCrontab = false);
+
+		foreach ($this->getPublications() as $publication) {
+			$temp->addJob($publication);
+		}
+
+		return $temp->render();
 	}
 }

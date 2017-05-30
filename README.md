@@ -89,6 +89,14 @@ Or selectively apply it with the [escape][8] filter.
 {{ user.username|escape }}
 ```
 
+## Testing
+
+The tests will drop and modify your crontab as part of the fixtures,
+so you should run them inside a docker container.
+
+    docker build -t razorbacks/test-cron ./tests/docker
+    docker run --rm -it -v "$PWD":/code razorbacks/test-cron
+
 [1]:https://getcomposer.org/
 [2]:https://en.wikipedia.org/wiki/Cron
 [3]:https://travis-ci.org/razorbacks/walton-news-publication-scheduler
