@@ -57,6 +57,21 @@ class Backup
         $this->directory = $real;
     }
 
+    protected function clean()
+    {
+        $files = glob("{$this->directory}/SchedulerBackup-*.crontab");
+
+        if (count($files) < 10) {
+            return;
+        }
+
+        rsort($files);
+
+        foreach (array_slice($files, 10) as $file) {
+            unlink($file);
+        }
+    }
+
     public function save()
     {
         if (is_null($this->scheduler)) {
@@ -72,6 +87,8 @@ class Backup
         if (false === file_put_contents($filename, $this->scheduler->backup())) {
             throw new Exception('Could not write backup to disk.');
         }
+
+        $this->clean();
 
         return $filename;
     }

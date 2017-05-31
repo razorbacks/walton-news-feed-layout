@@ -94,10 +94,10 @@ class BackupTest extends PHPUnit_Framework_TestCase
         $files = glob("$tmp/SchedulerBackup-*.crontab");
         $this->assertCount(10, $files);
 
-        $seven = 'categories\%5B0\%5D=7&count=2&view=list';
+        $one = 'categories\%5B0\%5D=1&count=2&view=list';
         $eleven = 'categories\%5B0\%5D=11&count=2&view=list';
         $actual = file_get_contents(end($files));
-        $this->assertContains($seven, $actual);
-        $this->assertNotContains($eleven, $actual);
+        $this->assertContains($one, $actual);
+        $this->assertContains($eleven, $actual);
     }
 }
