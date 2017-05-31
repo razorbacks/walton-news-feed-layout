@@ -68,7 +68,7 @@ class Scheduler extends Crontab {
 		$this->removeJob($publications[$hash])->write();
 
 		$backup = new Backup($this);
-		$backup->latest();
+		$backup->save();
 	}
 
 	public function getAnOpenMinute(){
@@ -110,7 +110,7 @@ class Scheduler extends Crontab {
 		$this->addJob($publication)->write();
 
 		$backup = new Backup($this);
-		$backup->latest();
+		$backup->save();
 	}
 
 	public function backup()

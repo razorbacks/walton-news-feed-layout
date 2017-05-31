@@ -59,24 +59,18 @@ class Backup
 
     public function save()
     {
-        return $this->write(date("Y-m-d\TH:i:s.uP"));
-    }
-
-    public function latest()
-    {
-        return $this->write('Latest');
-    }
-
-    protected function write($filename)
-    {
         if (is_null($this->scheduler)) {
             throw new Exception('Scheduler has not been set.');
         }
 
-        $filename = "{$this->directory}/SchedulerBackup-$filename.crontab";
+        // https://stackoverflow.com/a/38334226/4233593
+        list($second, $fraction) = explode('.', microtime($float = true));
+        $time = date("Y-m-d\TH:i:s.{$fraction}P", $second);
+
+        $filename = "{$this->directory}/SchedulerBackup-$time.crontab";
 
         if (false === file_put_contents($filename, $this->scheduler->backup())) {
-            throw new Exception('Could not write file to disk.');
+            throw new Exception('Could not write backup to disk.');
         }
 
         return $filename;

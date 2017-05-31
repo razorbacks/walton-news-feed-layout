@@ -71,22 +71,33 @@ class BackupTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains($noise, $actual);
     }
 
-    public function test_creates_latest_backup()
+    public function test_backs_up_last_ten_changes()
     {
         $tmp = sys_get_temp_dir();
         putenv("NEWS_PUBLICATION_STORAGE=$tmp");
 
-        $publication = array(
-            'categories' => array(16,42,88),
-            'count' => 2,
-            'view' => 'list',
-            'comments' => 'backup',
-        );
         $scheduler = new Scheduler;
-        $scheduler->createPublication($publication, $execute = false);
 
-        $expected = 'categories\%5B0\%5D=16&categories\%5B1\%5D=42&categories\%5B2\%5D=88&count=2&view=list';
-        $actual = file_get_contents("$tmp/SchedulerBackup-Latest.crontab");
-        $this->assertContains($expected, $actual);
+        $i = 12;
+        while (--$i) {
+            $scheduler->createPublication(
+                array(
+                    'categories' => array($i),
+                    'count' => 2,
+                    'view' => 'list',
+                    'comments' => 'backup',
+                ),
+                $execute = false
+            );
+        }
+
+        $files = glob("$tmp/SchedulerBackup-*.crontab");
+        $this->assertCount(10, $files);
+
+        $seven = 'categories\%5B0\%5D=7&count=2&view=list';
+        $eleven = 'categories\%5B0\%5D=11&count=2&view=list';
+        $actual = file_get_contents(end($files));
+        $this->assertContains($seven, $actual);
+        $this->assertNotContains($eleven, $actual);
     }
 }
