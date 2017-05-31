@@ -59,13 +59,11 @@ class Backup
 
     protected function clean()
     {
-        $files = glob("{$this->directory}/SchedulerBackup-*.crontab");
+        $files = $this->getFileList();
 
         if (count($files) < 10) {
             return;
         }
-
-        rsort($files);
 
         foreach (array_slice($files, 10) as $file) {
             unlink($file);
@@ -91,5 +89,33 @@ class Backup
         $this->clean();
 
         return $filename;
+    }
+
+    public function getFileList()
+    {
+        $files = glob("{$this->directory}/SchedulerBackup-*.crontab");
+
+        if (!empty($files)) {
+            rsort($files);
+        }
+
+        return $files;
+    }
+
+    public function renderFileList()
+    {
+        $files = $this->getFileList();
+
+        if (empty($files)) {
+            return '';
+        }
+
+        foreach ($files as &$file) {
+            $file = basename($file);
+        }
+
+        $list = implode('</li><li>', $files);
+
+        return "<ul><li>$list</li></ul>";
     }
 }

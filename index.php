@@ -7,6 +7,7 @@ $xsrf = substr(str_shuffle(MD5(microtime())), 0, 32);
 require_once __DIR__.'/vendor/autoload.php';
 
 use jpuck\Error\Handler;
+use razorbacks\walton\news\Backup;
 
 Handler::convertErrorsToExceptions();
 Handler::swift();
@@ -98,16 +99,11 @@ Handler::swift();
 	<h2>View</h2>
 	<?php require __DIR__.'/pages/crontab.php'; ?>
 
-	<h2>Backup</h2>
-	<form method="POST" action="pages/backup.php" class="form-horizontal">
-		<input name="xsrf" type="hidden" value="<?php echo $xsrf;?>">
-		<input name="return" type="hidden" value="<?php echo $_SERVER['SCRIPT_NAME']?>">
-		<div class="form-group">
-			<div class="col-sm-10">
-				<button type="submit" class="btn btn-primary">Create</button>
-			</div>
-		</div>
-	</form>
+	<h2>Backups</h2>
+	<?php
+	$backup = new Backup($scheduler);
+	echo $backup->renderFileList();
+	?>
 
 </div>
 
