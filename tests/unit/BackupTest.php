@@ -7,6 +7,13 @@ class BackupTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
+        putenv('NEWS_PUBLICATION_STORAGE');
+
+        $tmp = sys_get_temp_dir().'/SchedulerBackup-Latest.crontab';
+        if (file_exists($tmp)) {
+            unlink($tmp);
+        }
+
         `crontab -r`;
     }
 
@@ -62,5 +69,24 @@ class BackupTest extends PHPUnit_Framework_TestCase
         $actual = file_get_contents($filename);
         $this->assertContains($expected, $actual);
         $this->assertNotContains($noise, $actual);
+    }
+
+    public function test_creates_latest_backup()
+    {
+        $tmp = sys_get_temp_dir();
+        putenv("NEWS_PUBLICATION_STORAGE=$tmp");
+
+        $publication = array(
+            'categories' => array(16,42,88),
+            'count' => 2,
+            'view' => 'list',
+            'comments' => 'backup',
+        );
+        $scheduler = new Scheduler;
+        $scheduler->createPublication($publication, $execute = false);
+
+        $expected = 'categories\%5B0\%5D=16&categories\%5B1\%5D=42&categories\%5B2\%5D=88&count=2&view=list';
+        $actual = file_get_contents("$tmp/SchedulerBackup-Latest.crontab");
+        $this->assertContains($expected, $actual);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use jpuck\Error\Handler;
-use Dotenv\Dotenv;
 use razorbacks\walton\news\Backup;
 use razorbacks\walton\news\Scheduler;
 
@@ -36,17 +35,8 @@ if ($_POST['xsrf'] !== $_SESSION['xsrf']) {
     throw new Exception($error);
 }
 
-$dotenv = new Dotenv(dirname(__DIR__));
-$dotenv->load();
-
-$storage = getenv('NEWS_PUBLICATION_STORAGE');
-if ( empty($storage) ) {
-    $storage = __DIR__.'/../publications';
-}
-
 $backup = new Backup;
 $backup->setScheduler(new Scheduler);
-$backup->setStorage($storage);
 $backup->save();
 
 header("Location: $_POST[return]");

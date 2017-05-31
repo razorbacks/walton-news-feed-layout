@@ -66,6 +66,9 @@ class Scheduler extends Crontab {
 			throw new InvalidArgumentException("Publication does not exist.");
 		}
 		$this->removeJob($publications[$hash])->write();
+
+		$backup = new Backup($this);
+		$backup->latest();
 	}
 
 	public function getAnOpenMinute(){
@@ -105,6 +108,9 @@ class Scheduler extends Crontab {
 		}
 
 		$this->addJob($publication)->write();
+
+		$backup = new Backup($this);
+		$backup->latest();
 	}
 
 	public function backup()
