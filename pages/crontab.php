@@ -15,21 +15,25 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
 use razorbacks\walton\news\Scheduler;
+use razorbacks\walton\news\Xsrf;
 
 $scheduler = new Scheduler();
 
 // create
 if(isset($_POST['categories'],$_POST['count'],$_POST['view'],$_POST['comments'])){
+	Xsrf::verify();
 	$scheduler->createPublication($_POST);
 }
 
 // delete
 if(isset($_POST['delete'])){
+	Xsrf::verify();
 	$scheduler->deletePublication($_POST['delete']);
 }
 
 // run
 if(isset($_POST['run'])){
+	Xsrf::verify();
 	$scheduler->runPublication($_POST['run']);
 }
 
@@ -47,7 +51,8 @@ foreach($scheduler->getPublications() as $publication){
 
 	$hash = $publication->getHash();
 	?><td><form method="POST">
-		<input type="hidden"  name="run" value="<?php echo $hash; ?>"/>
+		<input name="xsrf" type="hidden" value="<?php echo $xsrf;?>">
+		<input type="hidden" name="run" value="<?php echo $hash; ?>"/>
 		<button class="btn btn-warning">Publish Now</button>
 	</form></td><?php
 
@@ -59,7 +64,8 @@ foreach($scheduler->getPublications() as $publication){
 
 	$hash = $publication->getHash();
 	?><td><form method="POST">
-		<input type="hidden"  name="delete" value="<?php echo $hash; ?>"/>
+		<input name="xsrf" type="hidden" value="<?php echo $xsrf;?>">
+		<input type="hidden" name="delete" value="<?php echo $hash; ?>"/>
 		<button class="btn btn-danger">Delete</button>
 	</form></td><?php
 

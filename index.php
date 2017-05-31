@@ -1,8 +1,8 @@
 <?php
 
 session_start();
+
 $xsrf = substr(str_shuffle(MD5(microtime())), 0, 32);
-$_SESSION["xsrf"] = $xsrf;
 
 require_once __DIR__.'/vendor/autoload.php';
 
@@ -41,6 +41,7 @@ Handler::swift();
 
 	<h2>Create</h2>
 	<form id="layout-form" class="form-horizontal">
+		<input name="xsrf" type="hidden" value="<?php echo $xsrf;?>">
 		<div class="form-group">
 			<label for="comments" class="control-label col-sm-2">Name:</label>
 			<div class="col-sm-10">
@@ -129,3 +130,6 @@ $("#btn-submit").click(function(){
 </script>
 </body>
 </html>
+
+<?php
+$_SESSION["xsrf"] = $xsrf;
