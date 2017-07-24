@@ -54,7 +54,8 @@ class Scheduler extends Crontab {
 			throw new InvalidArgumentException("Publication does not exist.");
 		}
 
-		exec($publications[$hash]->getCommand(), $output, $return);
+		$cmd = $publications[$hash]->getCommandUnescaped();
+		exec($cmd, $output, $return);
 		if($return != 0){
 			throw new Exception('Run Publication Error: '.implode(PHP_EOL, $output));
 		}
