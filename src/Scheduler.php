@@ -22,7 +22,7 @@ class Scheduler extends Crontab {
 		*/
 		$publication = unserialize(
 			preg_replace(
-				'/^O:\d+:"[^"]++"/', 
+				'/^O:\d+:"[^"]++"/',
 				'O:'.strlen($class).':"'.$class.'"',
 				serialize($job)
 			)
