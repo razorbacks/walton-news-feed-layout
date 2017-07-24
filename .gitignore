@@ -2,3 +2,4 @@
 /publications/
 /.htaccess
 .env
+/nbproject/private/
