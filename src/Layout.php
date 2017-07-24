@@ -92,6 +92,7 @@ class Layout {
 			foreach ($item["categories"] as $category){
 				if ($category == getenv('NEWS_PUBLICATION_FEATURED_CATEGORY_ID')) {
 					$featured = true;
+					break;
 				}
 			}
 			if ($featured){
