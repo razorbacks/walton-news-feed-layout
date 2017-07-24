@@ -26,5 +26,6 @@
 	</logging>
 	<php>
 		<env name="NEWS_PUBLICATION_DEFAULT_IMAGE_THUMBNAIL" value="https://wordpress.uark.edu/business/files/2015/01/default-128x128.jpg"/>
+		<env name="NEWS_PUBLICATION_FEATURED_CATEGORY_ID" value="22"/>
 	</php>
 </phpunit>

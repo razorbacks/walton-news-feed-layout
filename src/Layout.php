@@ -90,7 +90,7 @@ class Layout {
 			// show featured items first
 			$featured = false;
 			foreach ($item["categories"] as $category){
-				if ($category == 22) {
+				if ($category == getenv('NEWS_PUBLICATION_FEATURED_CATEGORY_ID')) {
 					$featured = true;
 				}
 			}
