@@ -13,7 +13,12 @@ class Layout {
     protected $html;
 
     public function __construct($feed, $categories, $count, $view){
-        $views = __DIR__."/../views";
+        $views = realpath(__DIR__."/../views");
+
+        if (false === $views) {
+            throw new Exception('Views directory not found.');
+        }
+
         if(!file_exists("$views/$view.twig.html")){
             throw new InvalidArgumentException(
                 "$view does not exist."
