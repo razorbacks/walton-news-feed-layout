@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "531f0312e1c1e23bbfd8b521f83f9512",
+    "content-hash": "3c95af13738102d3b7231bdeee7691a5",
     "packages": [
         {
             "name": "jpuck/error-exception-handler",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jpuck/error-exception-handler.git",
-                "reference": "5d30a00bedb772b177f5bf59da172e90c94a6ddc"
+                "reference": "eb6f8d422c89353f2f2fd63b52080f31b205b329"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jpuck/error-exception-handler/zipball/5d30a00bedb772b177f5bf59da172e90c94a6ddc",
-                "reference": "5d30a00bedb772b177f5bf59da172e90c94a6ddc",
+                "url": "https://api.github.com/repos/jpuck/error-exception-handler/zipball/eb6f8d422c89353f2f2fd63b52080f31b205b329",
+                "reference": "eb6f8d422c89353f2f2fd63b52080f31b205b329",
                 "shasum": ""
             },
             "require": {
@@ -41,7 +41,7 @@
                 }
             ],
             "description": "Convert errors to exceptions and handle them.",
-            "time": "2017-04-21T21:32:58+00:00"
+            "time": "2017-07-25T17:02:44+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
