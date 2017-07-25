@@ -13,7 +13,9 @@
         "yzalis/crontab": "1.0.4",
         "vlucas/phpdotenv": "v2.0.1",
         "php": ">=5.3.3",
-        "jpuck/error-exception-handler": "^0.1"
+        "jpuck/error-exception-handler": "^0.1",
+        "symfony/event-dispatcher": "2.6.13",
+        "guzzlehttp/guzzle": "^3.8"
     },
     "autoload": {
         "psr-4": {

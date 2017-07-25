@@ -5,6 +5,8 @@ use InvalidArgumentException;
 use Exception;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
+use Guzzle\Http\StaticClient as Guzzle;
+use Guzzle\Http\Exception\ClientErrorResponseException;
 
 class Layout {
     protected $news;
@@ -120,20 +122,28 @@ class Layout {
      */
     protected function fetchImageUrls($url)
     {
-        $json = file_get_contents($url);
+        $array = array();
+
+        try {
+            $response = Guzzle::get($url);
+        }
+        catch (ClientErrorResponseException $exception) {
+            // TODO: logger
+            return $array;
+        }
+
+        $json = $response->getBody(true);
         if ( empty($json) ) {
             throw new Exception("Nothing returned from URL: $url");
         }
 
-        $media = json_decode($json, $array = true);
+        $media = json_decode($json, true);
         if ( !is_array($media) ) {
             throw new Exception(
                 "JSON Error #".json_last_error().
                 ". see http://php.net/manual/en/function.json-last-error.php"
             );
         }
-
-        $array = array();
 
         foreach ( $media['media_details']['sizes'] as $size => $image ) {
             $array[$size] = $image['source_url'];
