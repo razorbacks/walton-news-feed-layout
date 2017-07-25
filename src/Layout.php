@@ -63,8 +63,9 @@ class Layout {
             );
         }
 
+        $rootPath = dirname(__DIR__);
         $twig = new Twig_Environment(
-            new Twig_Loader_Filesystem($views),
+            new Twig_Loader_Filesystem($views, $rootPath),
             array('autoescape' => false)
         );
         $this->build($twig->loadTemplate("$view.twig.html"));
