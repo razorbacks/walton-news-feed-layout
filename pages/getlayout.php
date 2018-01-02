@@ -4,6 +4,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 use jpuck\Error\Handler;
 use Dotenv\Dotenv;
 use razorbacks\walton\news\Layout;
+use razorbacks\walton\news\Request;
 
 Handler::convertErrorsToExceptions();
 Handler::swift();
@@ -28,7 +29,18 @@ if(!isset($_GET['categories'],$_GET['count'],$_GET['view'])){
 		'per_page' => $_GET['count'],
 	);
 	$query = http_build_query($query);
-	$feed = file_get_contents("$endpoint?$query");
+
+	// new wordpress server rejects missing user agent string
+	$userAgent = Request::USERAGENT;
+	$opts = [
+	    "http" => [
+	        "method" => "GET",
+	        "header" => "User-Agent: $userAgent\r\n"
+	    ]
+	];
+	$context = stream_context_create($opts);
+
+	$feed = file_get_contents("$endpoint?$query", false, $context);
 
 	$layout = new Layout($feed, $_GET['categories'],$_GET['count'],$_GET['view']);
 

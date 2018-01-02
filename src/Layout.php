@@ -5,8 +5,9 @@ use InvalidArgumentException;
 use Exception;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
-use Guzzle\Http\StaticClient as Guzzle;
+use Guzzle\Http\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
+use razorbacks\walton\news\Request;
 
 class Layout {
     protected $news;
@@ -125,7 +126,11 @@ class Layout {
         $array = array();
 
         try {
-            $response = Guzzle::get($url);
+            $client = new Client();
+
+            $client->setUserAgent(Request::USERAGENT);
+
+            $response = $client->get($url)->send();
         }
         catch (ClientErrorResponseException $exception) {
             // TODO: logger
