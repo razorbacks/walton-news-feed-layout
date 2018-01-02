@@ -32,12 +32,12 @@ if(!isset($_GET['categories'],$_GET['count'],$_GET['view'])){
 
 	// new wordpress server rejects missing user agent string
 	$userAgent = Request::USERAGENT;
-	$opts = [
-	    "http" => [
+	$opts = array(
+	    "http" => array(
 	        "method" => "GET",
 	        "header" => "User-Agent: $userAgent\r\n"
-	    ]
-	];
+	    )
+	);
 	$context = stream_context_create($opts);
 
 	$feed = file_get_contents("$endpoint?$query", false, $context);
