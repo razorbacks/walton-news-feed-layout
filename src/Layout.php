@@ -7,6 +7,7 @@ use Twig_Environment;
 use Twig_Loader_Filesystem;
 use Guzzle\Http\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
+use razorbacks\walton\news\Request;
 
 class Layout {
     protected $news;
@@ -127,7 +128,7 @@ class Layout {
         try {
             $client = new Client();
 
-            $client->setUserAgent('Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0');
+            $client->setUserAgent(Request::USERAGENT);
 
             $response = $client->get($url)->send();
         }
