@@ -12,6 +12,8 @@ matrix:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y cron
+  - sudo mv "$TRAVIS_BUILD_DIR" /code
+  - cd /code
 install:
   - cp example.env .env
   - mkdir publications
